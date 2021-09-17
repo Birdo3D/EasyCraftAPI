@@ -13,19 +13,62 @@ public class CreativeTabs {
     int tabIndex;
     public static CreativeTabs[] CREATIVE_TAB_ARRAY = new CreativeTabs[1];
 
-    public static final CreativeTabs BUILDING_BLOCKS = (new CreativeTabs(0, "Building Blocks") {
+    public static final CreativeTabs BLOCKS = (new CreativeTabs(0, "Blocks") {
         @Override
         public Items getTabIconItem() {
-            return new Items(Material.GRASS_BLOCK, -1);
+            return new Items(Material.BRICKS, -1);
         }
     });
 
-    public static final CreativeTabs TEST = (new CreativeTabs(1, "TEST Blocks") {
+    public static final CreativeTabs REDSTONE = (new CreativeTabs(1, "Redstone") {
         @Override
         public Items getTabIconItem() {
-            return new Items(Material.GRASS_BLOCK, -1);
+            return new Items(Material.REDSTONE, -1);
         }
     });
+
+    public static final CreativeTabs TRANSPORTATION = (new CreativeTabs(2, "Transportation") {
+        @Override
+        public Items getTabIconItem() {
+            return new Items(Material.POWERED_RAIL, -1);
+        }
+    });
+
+    public static final CreativeTabs BREWING = (new CreativeTabs(3, "Brewing") {
+        @Override
+        public Items getTabIconItem() {
+            return new Items(Material.POTION, -1);
+        }
+    });
+
+    public static final CreativeTabs MISCELLANEOUS = (new CreativeTabs(4, "Miscellaneous") {
+        @Override
+        public Items getTabIconItem() {
+            return new Items(Material.LAVA_BUCKET, -1);
+        }
+    });
+
+    public static final CreativeTabs FOODSTUFFS = (new CreativeTabs(5, "Foodstuffs") {
+        @Override
+        public Items getTabIconItem() {
+            return new Items(Material.APPLE, -1);
+        }
+    });
+
+    public static final CreativeTabs TOOLS = (new CreativeTabs(6, "Tools") {
+        @Override
+        public Items getTabIconItem() {
+            return new Items(Material.IRON_AXE, -1);
+        }
+    });
+
+    public static final CreativeTabs COMBAT = (new CreativeTabs(7, "Combat") {
+        @Override
+        public Items getTabIconItem() {
+            return new Items(Material.GOLDEN_SWORD, -1);
+        }
+    });
+
 
     public CreativeTabs() {
     }

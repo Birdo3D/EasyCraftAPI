@@ -2,7 +2,6 @@ package fr.birdo.easycraftapi;
 
 import fr.birdo.easycraftapi.creative.CreativeTabs;
 import fr.birdo.easycraftapi.util.BlockPos;
-import fr.birdo.easycraftapi.util.EnumActionResult;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
@@ -116,7 +115,7 @@ public class Items {
     }
 
     public boolean hasEnchantment() {
-        return !enchantments.isEmpty();
+        return enchantments.size() != 0;
     }
 
     public List<Enchantment> getEnchantments() {
@@ -127,12 +126,10 @@ public class Items {
         return this.enchantmentsLevel.get(enchantment);
     }
 
-    public EnumActionResult onItemUse(Player player, World worldIn, BlockPos pos) {
-        return EnumActionResult.PASS;
+    public void onItemUse(Player player, World worldIn, BlockPos pos) {
     }
 
-    public EnumActionResult onItemRightClick(World worldIn, Player playerIn) {
-        return EnumActionResult.PASS;
+    public void onItemRightClick(World worldIn, Player playerIn) {
     }
 
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {

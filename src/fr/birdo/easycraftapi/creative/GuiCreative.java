@@ -21,7 +21,7 @@ public class GuiCreative extends GuiScreen {
 
     public void drawScreen() {
         setGuiSize(this.size);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < CreativeTabs.getNextID(); i++) {
             CreativeTabs creativeTabs = CreativeTabs.getTabById(i);
             addButton(new GuiButton(CreativeTabs.getTabById(i).getTabIconItem().setName(CreativeTabs.getTabById(i).getTabName()), creativeTabs.getId(), this.tabsSlots[i]));
         }
@@ -37,8 +37,8 @@ public class GuiCreative extends GuiScreen {
     @Override
     public String getCustomName() {
         if (tabName == null)
-            return ChatColor.GREEN + "Creative Inventory";
-        return ChatColor.GREEN + "Creative Inventory" + tabName;
+            return ChatColor.BOLD + "Creative Inventory";
+        return ChatColor.BOLD + "Creative Inventory" + tabName;
     }
 
     public void onButtonPressed(int buttonIndex) {

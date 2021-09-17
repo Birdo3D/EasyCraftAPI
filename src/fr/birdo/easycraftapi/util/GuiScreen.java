@@ -1,26 +1,24 @@
 package fr.birdo.easycraftapi.util;
 
-import fr.birdo.easycraftapi.GameRegistry;
 import fr.birdo.easycraftapi.Items;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GuiScreen {
 
-    private int index;
     private int size;
-    private String customName;
+    private static String customName;
     private static final Map<Integer, GuiButton> buttons = new HashMap<>();
-    private static final Map<Integer, Items> items = new HashMap<>();
+    private static final List<Integer> pickable = new ArrayList<>();
+    public static final Map<Integer, Items> items = new HashMap<>();
 
     public void initGui() {
-        this.customName = this.getCustomName();
+        customName = this.getCustomName();
     }
 
     public static void updateScreen(int tick) {
@@ -37,16 +35,12 @@ public class GuiScreen {
     public void onButtonPressed(int buttonIndex) {
     }
 
-    public int getId() {
-        return this.index;
-    }
-
     public int getSize() {
         return this.size;
     }
 
     public String getCustomName() {
-        return this.customName;
+        return " ";
     }
 
     public void addButton(GuiButton button) {
@@ -66,15 +60,37 @@ public class GuiScreen {
         return buttons.get(index);
     }
 
-    public static void buttonIsPressed(Player player, InventoryView view, ItemStack stack) {
-        //if (view.getTitle().equalsIgnoreCase(customName)) {
+    public static void buttonIsPressed(Player player, InventoryView view, int slotIndex) {
+        if (view.getTitle().equalsIgnoreCase(customName)) {
             for (GuiButton guiButton : buttons.values()) {
-                //if (stack.isSimilar(Item.getStackFromItem(guiButton.getItem()))) {
-                GuiScreen guiScreen = new GuiScreen();
-                guiScreen.onButtonPressed(guiButton.getId());
-                break;
-                //}
+                if (isButton(slotIndex)) {
+                    GuiScreen guiScreen = new GuiScreen();
+                    guiScreen.onButtonPressed(guiButton.getId());
+                    break;
+                }
             }
-        //}
+        }
+    }
+
+    public GuiScreen setItemPickable(int slotIndex) {
+        this.pickable.add(slotIndex);
+        return this;
+    }
+
+    public GuiScreen setItemPickable(int[] slotsIndex) {
+        for (int i : slotsIndex)
+            this.pickable.add(i);
+        return this;
+    }
+
+    public static boolean isItemPickable(int slotIndex) {
+        return pickable.contains(slotIndex);
+    }
+
+    public static boolean isButton(int slotIndex) {
+        for (int i = 0; i < buttons.size(); i++)
+            if (buttons.get(i).getPos() == slotIndex)
+                return true;
+        return false;
     }
 }

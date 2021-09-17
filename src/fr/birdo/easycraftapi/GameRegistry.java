@@ -1,10 +1,8 @@
 package fr.birdo.easycraftapi;
 
-import fr.birdo.easycraftapi.creative.CommandCreative;
 import fr.birdo.easycraftapi.creative.CreativeTabs;
 import fr.birdo.easycraftapi.util.Command;
 import fr.birdo.easycraftapi.util.GuiScreen;
-import fr.birdo.easycraftapi.util.Random;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;
@@ -17,30 +15,30 @@ public class GameRegistry {
     public static final Map<Integer, GuiScreen> registeredGuis = new HashMap<>();
     public static final Map<Integer, Command> registeredCommands = new HashMap<>();
 
-    public void registerItems(Items item) {
+    public void registerItems(String pluginIndex, Items item) {
         registeredItems.put(item.getId(), item);
         isBeingRegistryMessage(item);
     }
 
-    public void registerAllItems(Items... items) {
+    public void registerAllItems(String pluginIndex, Items... items) {
         for (Items item : items) {
             registeredItems.put(item.getId(), item);
             isBeingRegistryMessage(item);
         }
     }
 
-    public void registerCreativeTab(CreativeTabs tab) {
+    public void registerCreativeTab(String pluginIndex, CreativeTabs tab) {
         registeredCreativeTabs.put(registeredCreativeTabs.size(), tab);
         isBeingRegistryMessage(tab);
     }
 
-    public void registerGui(GuiScreen gui, int index) {
+    public void registerGui(String pluginIndex, GuiScreen gui, int index) {
         registeredGuis.put(index, gui);
         isBeingRegistryMessage(gui);
     }
 
-    public void registerCommand(Command command) {
-        registeredCommands.put(Random.roll(0, 1555), command);
+    public void registerCommand(String pluginIndex, Command command) {
+        registeredCommands.put(command.getCommandIndex(), command);
     }
 
     public void isBeingRegistryMessage(Items item) {
