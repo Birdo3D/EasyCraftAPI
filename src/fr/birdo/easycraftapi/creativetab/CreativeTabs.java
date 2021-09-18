@@ -1,7 +1,8 @@
-package fr.birdo.easycraftapi.creative;
+package fr.birdo.easycraftapi.creativetab;
 
-import fr.birdo.easycraftapi.GameRegistry;
-import fr.birdo.easycraftapi.Items;
+import fr.birdo.easycraftapi.registry.GameRegistry;
+import fr.birdo.easycraftapi.item.Items;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class CreativeTabs {
             CREATIVE_TAB_ARRAY = tmp;
         }
         this.tabIndex = index;
-        this.tabLabel = label;
+        this.tabLabel = ChatColor.GOLD + label;
         CREATIVE_TAB_ARRAY[index] = this;
     }
 

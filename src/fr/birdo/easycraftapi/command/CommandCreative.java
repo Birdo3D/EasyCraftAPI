@@ -1,7 +1,6 @@
-package fr.birdo.easycraftapi.creative;
+package fr.birdo.easycraftapi.command;
 
-import fr.birdo.easycraftapi.util.Command;
-import fr.birdo.easycraftapi.util.PlayerHelper;
+import fr.birdo.easycraftapi.entity.PlayerHelper;
 import org.bukkit.entity.Player;
 
 public class CommandCreative extends Command {

@@ -1,6 +1,6 @@
-package fr.birdo.easycraftapi;
+package fr.birdo.easycraftapi.item;
 
-import fr.birdo.easycraftapi.creative.CreativeTabs;
+import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.util.BlockPos;
 import org.bukkit.Material;
 import org.bukkit.World;

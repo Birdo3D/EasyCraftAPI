@@ -1,6 +1,5 @@
-package fr.birdo.easycraftapi.util;
+package fr.birdo.easycraftapi.item;
 
-import fr.birdo.easycraftapi.Items;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

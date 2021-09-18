@@ -1,8 +1,7 @@
-package fr.birdo.easycraftapi.creative;
+package fr.birdo.easycraftapi.inventory;
 
-import fr.birdo.easycraftapi.Items;
-import fr.birdo.easycraftapi.util.GuiButton;
-import fr.birdo.easycraftapi.util.GuiScreen;
+import fr.birdo.easycraftapi.item.Items;
+import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
@@ -10,6 +9,7 @@ public class GuiCreative extends GuiScreen {
 
     private int size;
     private int creativeTab = 0;
+    private final int page = 0;
     private String tabName;
     private final int[] tabsSlots = new int[]{9, 17, 18, 26, 27, 35, 36, 44};
     private final int[] itemsSlots = new int[]{0, 1, 2};
@@ -32,6 +32,14 @@ public class GuiCreative extends GuiScreen {
         }
         for (int i = 0; i < 9; i++)
             addItem(new Items(Material.GRAY_STAINED_GLASS_PANE, -1).setName(" "), i);
+        for (int i = 45; i < 54; i++) {
+            if (i == 48) {
+                addItem(new Items(Material.BROWN_STAINED_GLASS_PANE, -1).setName(ChatColor.DARK_GREEN + "Page Précédante"), i);
+            } else if (i == 50) {
+                addItem(new Items(Material.BROWN_STAINED_GLASS_PANE, -1).setName(ChatColor.DARK_GREEN + "Page Suivante"), i);
+            } else
+                addItem(new Items(Material.GRAY_STAINED_GLASS_PANE, -1).setName(" "), i);
+        }
     }
 
     @Override

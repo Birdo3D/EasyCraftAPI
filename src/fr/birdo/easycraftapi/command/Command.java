@@ -1,4 +1,4 @@
-package fr.birdo.easycraftapi.util;
+package fr.birdo.easycraftapi.command;
 
 import org.bukkit.entity.Player;
 

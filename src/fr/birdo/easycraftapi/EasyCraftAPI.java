@@ -1,7 +1,9 @@
 package fr.birdo.easycraftapi;
 
-import fr.birdo.easycraftapi.creative.CommandCreative;
-import fr.birdo.easycraftapi.creative.GuiCreative;
+import fr.birdo.easycraftapi.command.CommandCreative;
+import fr.birdo.easycraftapi.inventory.GuiCreative;
+import fr.birdo.easycraftapi.registry.EventHandler;
+import fr.birdo.easycraftapi.registry.GameRegistry;
 import fr.birdo.easycraftapi.util.Messages;
 import fr.birdo.easycraftapi.util.Ticking;
 import org.bukkit.plugin.java.JavaPlugin;

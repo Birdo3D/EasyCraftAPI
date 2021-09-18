@@ -1,7 +1,9 @@
-package fr.birdo.easycraftapi;
+package fr.birdo.easycraftapi.registry;
 
-import fr.birdo.easycraftapi.util.Command;
-import fr.birdo.easycraftapi.util.GuiScreen;
+import fr.birdo.easycraftapi.EasyCraftAPI;
+import fr.birdo.easycraftapi.command.Command;
+import fr.birdo.easycraftapi.registry.GameRegistry;
+import fr.birdo.easycraftapi.inventory.GuiScreen;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;

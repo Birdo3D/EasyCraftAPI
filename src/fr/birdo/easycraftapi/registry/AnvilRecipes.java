@@ -1,4 +1,6 @@
-package fr.birdo.easycraftapi;
+package fr.birdo.easycraftapi.registry;
+
+import fr.birdo.easycraftapi.item.Items;
 
 public class AnvilRecipes {
 

@@ -1,8 +1,9 @@
-package fr.birdo.easycraftapi;
+package fr.birdo.easycraftapi.registry;
 
-import fr.birdo.easycraftapi.creative.CreativeTabs;
-import fr.birdo.easycraftapi.util.Command;
-import fr.birdo.easycraftapi.util.GuiScreen;
+import fr.birdo.easycraftapi.item.Items;
+import fr.birdo.easycraftapi.creativetab.CreativeTabs;
+import fr.birdo.easycraftapi.command.Command;
+import fr.birdo.easycraftapi.inventory.GuiScreen;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package fr.birdo.easycraftapi.util;
+package fr.birdo.easycraftapi.inventory;
 
-import fr.birdo.easycraftapi.Items;
+import fr.birdo.easycraftapi.item.Items;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 

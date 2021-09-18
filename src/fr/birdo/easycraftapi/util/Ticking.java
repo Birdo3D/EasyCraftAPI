@@ -1,6 +1,7 @@
 package fr.birdo.easycraftapi.util;
 
 import fr.birdo.easycraftapi.EasyCraftAPI;
+import fr.birdo.easycraftapi.inventory.GuiScreen;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
