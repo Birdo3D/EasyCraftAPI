@@ -35,16 +35,13 @@ public class EventHandler implements Listener {
                         if (args.length > 2 && command.getArgsSize(i) != 0) {
                             for (int j = 0; j < command.getArgsSize(i); j++) {
                                 if (args[j + 2].equalsIgnoreCase(command.getArg(i, j)))
-                                    //command.onCommandExecuted(e.getPlayer(), i, j);
                                     GameRegistry.registeredCommands.get(command.getCommandIndex()).onCommandExecuted(e.getPlayer(), i, j);
                             }
                         } else if (args.length == 2)
-                            //command.onCommandExecuted(e.getPlayer(), i, -1);
                             GameRegistry.registeredCommands.get(command.getCommandIndex()).onCommandExecuted(e.getPlayer(), i, -1);
                     }
                 }
             } else if (args.length == 1)
-                //command.onCommandExecuted(e.getPlayer(), -1, -1);
                 GameRegistry.registeredCommands.get(command.getCommandIndex()).onCommandExecuted(e.getPlayer(), -1, -1);
             e.setCancelled(true);
         }

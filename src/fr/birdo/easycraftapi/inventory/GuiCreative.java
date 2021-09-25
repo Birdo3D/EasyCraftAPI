@@ -23,7 +23,7 @@ public class GuiCreative extends GuiScreen {
         this.creativeTab = 0;
         this.indicatorSlot = 10;
         this.tabPage = 0;
-        this.itemsPage = 0;
+        this.itemsPage = 1;
         this.size = 6 * 9;
         for (int i = 11; i < 42; i++) {
             if (i != 16 && i != 17 && i != 18 && i != 19 && i != 25 && i != 26 && i != 27 && i != 28 && i != 34 && i != 35 && i != 36 && i != 37)
@@ -50,18 +50,23 @@ public class GuiCreative extends GuiScreen {
             addItem(new Items(Material.GRAY_STAINED_GLASS_PANE, -1).setName(" "), i);
         //Draw bottom
         for (int i = 45; i < 54; i++) {
-            switch (i) {
-                case 48:
-                    addItem(new Items(Material.BROWN_STAINED_GLASS_PANE, -1).setName(ChatColor.DARK_GREEN + "Page Précédante"), i);
-                case 50:
-                    addItem(new Items(Material.BROWN_STAINED_GLASS_PANE, -1).setName(ChatColor.DARK_GREEN + "Page Suivante"), i);
-                default:
+            if ((CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size() / 20) > 1) {
+                if (i == 48 && this.itemsPage > 1) {
+                    addButton(new GuiButton(new Items(Material.BROWN_STAINED_GLASS_PANE, -1).setName(ChatColor.DARK_GREEN + "Page Précédante"), CreativeTabs.getNextID(), i));
+                } else if (i == 50 && this.itemsPage < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size() / 20) {
+                    addButton(new GuiButton(new Items(Material.BROWN_STAINED_GLASS_PANE, -1).setName(ChatColor.DARK_GREEN + "Page Suivante"), CreativeTabs.getNextID() + 1, i));
+                } else {
                     addItem(new Items(Material.GRAY_STAINED_GLASS_PANE, -1).setName(" "), i);
+                }
+            } else {
+                addItem(new Items(Material.GRAY_STAINED_GLASS_PANE, -1).setName(" "), i);
             }
         }
         //Display items
-        for (int i = 0; i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size(); i++)
-            addItem(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), this.itemsSlots.get(i));
+        for (int i = (this.itemsPage - 1) * 20; i < (this.itemsPage - 1) * 20 + 20; i++)
+            if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size()) {
+                addItem(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), this.itemsSlots.get(i - ((this.itemsPage - 1) * 20)));
+            }
     }
 
     @Override
@@ -70,6 +75,7 @@ public class GuiCreative extends GuiScreen {
     }
 
     public void onButtonPressed(int buttonIndex) {
+        int nextId = CreativeTabs.getNextID();
         this.creativeTab = buttonIndex;
         for (int tabsSlot : this.indicatorSlots) {
             if (GuiScreen.getButtonById(buttonIndex).getPos() - 1 == tabsSlot) {
@@ -78,6 +84,11 @@ public class GuiCreative extends GuiScreen {
             } else {
                 indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() + 1;
             }
+        }
+        if (buttonIndex == nextId) {
+            this.itemsPage--;
+        } else if (buttonIndex == nextId + 1) {
+            this.itemsPage++;
         }
     }
 }

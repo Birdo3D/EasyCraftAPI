@@ -9,6 +9,12 @@ import java.util.List;
 public class Blocks {
 
     public static Blocks STONE = new Blocks(Material.STONE, 1).setCreativeTab(CreativeTabs.BLOCKS);
+    public static Blocks GRANITE = new Blocks(Material.GRANITE, 2).setCreativeTab(CreativeTabs.BLOCKS);
+    public static Blocks POLISHED_GRANITE = new Blocks(Material.POLISHED_GRANITE, 3).setCreativeTab(CreativeTabs.BLOCKS);
+    public static Blocks DIORITE = new Blocks(Material.DIORITE, 4).setCreativeTab(CreativeTabs.BLOCKS);
+    public static Blocks POLISHED_DIORITE = new Blocks(Material.POLISHED_DIORITE, 5).setCreativeTab(CreativeTabs.BLOCKS);
+    public static Blocks ANDESITE = new Blocks(Material.ANDESITE, 6).setCreativeTab(CreativeTabs.BLOCKS);
+    public static Blocks POLISHED_ANDESITE = new Blocks(Material.POLISHED_ANDESITE, 7).setCreativeTab(CreativeTabs.BLOCKS);
 
     private Material material;
     private int meta = 0;

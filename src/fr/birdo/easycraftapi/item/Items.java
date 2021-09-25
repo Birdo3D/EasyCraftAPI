@@ -18,10 +18,16 @@ import java.util.Map;
 public class Items {
 
     //Items
-    public static Items DIAMOND = new Items(Material.DIAMOND, 2).setCreativeTab(CreativeTabs.MISCELLANEOUS);
+    public static Items DIAMOND = new Items(Material.DIAMOND, 9).setCreativeTab(CreativeTabs.MISCELLANEOUS);
 
     //Items Blocks
-    public static Items STONE = new ItemBlock(Blocks.STONE, Material.STONE);
+    public static Items STONE_ITEM = new ItemBlock(Blocks.STONE, Material.STONE);
+    public static Items GRANITE_ITEM = new ItemBlock(Blocks.GRANITE, Material.GRANITE);
+    public static Items POLISHED_GRANITE_ITEM = new ItemBlock(Blocks.POLISHED_GRANITE, Material.POLISHED_GRANITE);
+    public static Items DIORITE_ITEM = new ItemBlock(Blocks.DIORITE, Material.DIORITE);
+    public static Items POLISHED_DIORITE_ITEM = new ItemBlock(Blocks.POLISHED_DIORITE, Material.POLISHED_DIORITE);
+    public static Items ANDESITE_ITEM = new ItemBlock(Blocks.ANDESITE, Material.ANDESITE);
+    public static Items POLISHED_ANDESITE_ITEM = new ItemBlock(Blocks.POLISHED_ANDESITE, Material.POLISHED_ANDESITE);
 
     Material material;
     int id;

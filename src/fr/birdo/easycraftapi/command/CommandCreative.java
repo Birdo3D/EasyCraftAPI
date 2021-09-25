@@ -11,7 +11,6 @@ public class CommandCreative extends Command {
     }
 
     public void onCommandExecuted(Player player, int variantIndex, int argsIndex) {
-        System.out.println(player + " " + variantIndex + " " + argsIndex);
         if (variantIndex == 0 && argsIndex == -1)
             PlayerHelper.displayGui(player, 1);
     }

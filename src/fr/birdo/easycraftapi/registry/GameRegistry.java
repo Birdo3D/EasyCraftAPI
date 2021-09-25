@@ -18,7 +18,6 @@ import java.util.Map;
 public class GameRegistry {
 
     public static final Map<Integer, Items> registeredItems = new HashMap<>();
-    public static final Map<Integer, CreativeTabs> registeredCreativeTabs = new HashMap<>();
     public static final Map<Integer, GuiScreen> registeredGuis = new HashMap<>();
     public static final Map<String, GuiScreen> registeredGuisByName = new HashMap<>();
     public static final Map<Integer, Blocks> registeredBlocks = new HashMap<>();
@@ -30,7 +29,13 @@ public class GameRegistry {
         registerVanillaItems(Items.DIAMOND);
 
         //ItemBlocks
-        registerVanillaItems(Items.STONE);
+        registerVanillaItems(Items.STONE_ITEM);
+        registerVanillaItems(Items.GRANITE_ITEM);
+        registerVanillaItems(Items.POLISHED_GRANITE_ITEM);
+        registerVanillaItems(Items.DIORITE_ITEM);
+        registerVanillaItems(Items.POLISHED_DIORITE_ITEM);
+        registerVanillaItems(Items.ANDESITE_ITEM);
+        registerVanillaItems(Items.POLISHED_ANDESITE_ITEM);
 
         //Blocks
         Messages.printMessage(Messages.registeringVanillaBlocksMessage);
