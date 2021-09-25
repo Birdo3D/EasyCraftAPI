@@ -19,4 +19,16 @@ public class PlayerHelper {
         }
         playerIn.openInventory(inventory);
     }
+
+    protected static void updateGui(Player playerIn, GuiScreen guiScreen){
+        GuiScreen gui = new GuiScreen();
+        gui.updateScreen();
+        guiScreen.drawScreen();
+        Inventory inventory = Bukkit.createInventory(null, guiScreen.getSize(), guiScreen.getCustomName());
+        for (int i = 0; i < guiScreen.getSize(); i++) {
+            if (GuiScreen.items.containsKey(i))
+                inventory.setItem(i, Item.getStackFromItem(GuiScreen.items.get(i)));
+        }
+        playerIn.openInventory(inventory);
+    }
 }

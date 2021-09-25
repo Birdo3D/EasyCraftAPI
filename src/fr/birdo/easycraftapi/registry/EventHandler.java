@@ -18,7 +18,7 @@ public class EventHandler implements Listener {
     public void guiClicked(InventoryClickEvent event) {
         if(event.getCurrentItem() != null) {
             if (event.getWhoClicked() instanceof Player)
-                GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), event.getView(), event.getSlot());
+                GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuisByName.get(event.getView().getTitle()), event.getSlot());
             if (GuiScreen.isButton(event.getSlot()) || !GuiScreen.isItemPickable(event.getSlot()))
                 event.setCancelled(true);
         }

@@ -1,5 +1,6 @@
 package fr.birdo.easycraftapi.item;
 
+import fr.birdo.easycraftapi.block.Blocks;
 import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.util.BlockPos;
 import org.bukkit.Material;
@@ -9,20 +10,27 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Items {
 
+    //Items
+    public static Items DIAMOND = new Items(Material.DIAMOND, 2).setCreativeTab(CreativeTabs.MISCELLANEOUS);
+
+    //Items Blocks
+    public static Items STONE = new ItemBlock(Blocks.STONE, Material.STONE);
+
     Material material;
     int id;
     int meta;
     String name;
-    List<Enchantment> enchantments;
+    List<Enchantment> enchantments = new ArrayList<>();
     Map<Enchantment, Integer> enchantmentsLevel = new HashMap<>();
-    List<CreativeTabs> creativeTabs;
-    List<String> lore;
+    List<CreativeTabs> creativeTabs = new ArrayList<>();
+    List<String> lore = new ArrayList<>();
     boolean unbreakable;
     int maxStackSize = 64;
     int maxDamage;

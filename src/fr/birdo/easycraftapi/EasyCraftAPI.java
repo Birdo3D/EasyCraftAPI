@@ -16,6 +16,7 @@ public class EasyCraftAPI extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new EventHandler(this), this);
         getServer().getPluginManager().registerEvents(new Ticking(this), this);
+        GAME_REGISTRY.vanillaRegistering();
         GAME_REGISTRY.registerCommand("api", new CommandCreative());
         GAME_REGISTRY.registerGui("api", new GuiCreative(), 1);
         Ticking.tick();

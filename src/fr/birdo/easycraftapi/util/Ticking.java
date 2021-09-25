@@ -1,7 +1,6 @@
 package fr.birdo.easycraftapi.util;
 
 import fr.birdo.easycraftapi.EasyCraftAPI;
-import fr.birdo.easycraftapi.inventory.GuiScreen;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
@@ -16,7 +15,7 @@ public class Ticking implements Listener {
 
     public static void tick() {
         count = Bukkit.getScheduler().scheduleSyncRepeatingTask(instance, () -> {
-            GuiScreen.updateScreen(count);
+
             if (count > 1000000000)
                 count = 0;
         }, 0L, 1L);

@@ -1,27 +1,28 @@
 package fr.birdo.easycraftapi.inventory;
 
+import fr.birdo.easycraftapi.entity.PlayerHelper;
 import fr.birdo.easycraftapi.item.Items;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GuiScreen {
+public class GuiScreen extends PlayerHelper {
 
     private int size;
-    private static String customName;
     private static final Map<Integer, GuiButton> buttons = new HashMap<>();
     private static final List<Integer> pickable = new ArrayList<>();
     public static final Map<Integer, Items> items = new HashMap<>();
 
     public void initGui() {
-        customName = this.getCustomName();
     }
 
-    public static void updateScreen(int tick) {
+    public void updateScreen() {
+        buttons.clear();
+        pickable.clear();
+        items.clear();
     }
 
     public void drawScreen() {
@@ -60,12 +61,12 @@ public class GuiScreen {
         return buttons.get(index);
     }
 
-    public static void buttonIsPressed(Player player, InventoryView view, int slotIndex) {
-        if (view.getTitle().equalsIgnoreCase(customName)) {
+    public static void buttonIsPressed(Player player, GuiScreen gui, int slotIndex) {
+        if (isButton(slotIndex)) {
             for (GuiButton guiButton : buttons.values()) {
-                if (isButton(slotIndex)) {
-                    GuiScreen guiScreen = new GuiScreen();
-                    guiScreen.onButtonPressed(guiButton.getId());
+                if (guiButton.getPos() == slotIndex) {
+                    gui.onButtonPressed(guiButton.getId());
+                    PlayerHelper.updateGui(player, gui);
                     break;
                 }
             }
@@ -88,7 +89,7 @@ public class GuiScreen {
     }
 
     public static boolean isButton(int slotIndex) {
-        for (int i = 0; i < buttons.size(); i++)
+        for (int i : buttons.keySet())
             if (buttons.get(i).getPos() == slotIndex)
                 return true;
         return false;
