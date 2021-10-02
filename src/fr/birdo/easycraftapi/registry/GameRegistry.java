@@ -1,5 +1,6 @@
 package fr.birdo.easycraftapi.registry;
 
+import fr.birdo.easycraftapi.EasyCraftAPI;
 import fr.birdo.easycraftapi.block.Blocks;
 import fr.birdo.easycraftapi.item.ItemBlock;
 import fr.birdo.easycraftapi.item.Items;
@@ -14,18 +15,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class GameRegistry {
 
     public static final Map<Integer, Items> registeredItems = new HashMap<>();
     public static final Map<Integer, GuiScreen> registeredGuis = new HashMap<>();
-    public static final Map<String, GuiScreen> registeredGuisByName = new HashMap<>();
     public static final Map<Integer, Blocks> registeredBlocks = new HashMap<>();
     public static final Map<Integer, Command> registeredCommands = new HashMap<>();
 
+    private static EasyCraftAPI instance;
+
+    public GameRegistry(EasyCraftAPI easyCraftAPI) {
+        instance = easyCraftAPI;
+    }
+
+    public GameRegistry() {
+    }
+
     public void vanillaRegistering() {
         //Items
-        Messages.printMessage(Messages.registeringVanillaItemsMessage);
+        instance.logger.log(Level.INFO, Messages.registeringVanillaItemsMessage);
+
         registerVanillaItems(Items.DIAMOND);
 
         //ItemBlocks
@@ -53,26 +64,24 @@ public class GameRegistry {
         registerVanillaItems(Items.DIAM1115ND);
 
         //Blocks
-        Messages.printMessage(Messages.registeringVanillaBlocksMessage);
+        instance.logger.log(Level.INFO, Messages.registeringVanillaBlocksMessage);
         registerVanillaBlocks(Blocks.STONE);
     }
 
     public void registerItems(String pluginIndex, Items item) {
         registeredItems.put(item.getId(), item);
-        Messages.printMessage(Messages.registeringItemMessage(item.getName()));
+        instance.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
     }
 
     public void registerAllItems(String pluginIndex, Items... items) {
         for (Items item : items) {
             registeredItems.put(item.getId(), item);
-            Messages.printMessage(Messages.registeringItemMessage(item.getName()));
+            instance.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
         }
     }
 
     public void registerGui(String pluginIndex, GuiScreen gui, int index) {
         registeredGuis.put(index, gui);
-        registeredGuisByName.put(gui.getCustomName(), gui);
-        Messages.printMessage(Messages.registeringGuiMessage(gui.getCustomName()));
     }
 
     public void registerCommand(String pluginIndex, Command command) {

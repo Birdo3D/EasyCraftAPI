@@ -2,12 +2,12 @@ package fr.birdo.easycraftapi.registry;
 
 import fr.birdo.easycraftapi.EasyCraftAPI;
 import fr.birdo.easycraftapi.command.Command;
-import fr.birdo.easycraftapi.registry.GameRegistry;
 import fr.birdo.easycraftapi.inventory.GuiScreen;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.inventory.PlayerInventory;
 
 public class EventHandler implements Listener {
 
@@ -16,11 +16,12 @@ public class EventHandler implements Listener {
 
     @org.bukkit.event.EventHandler
     public void guiClicked(InventoryClickEvent event) {
-        if(event.getCurrentItem() != null) {
-            if (event.getWhoClicked() instanceof Player)
-                GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuisByName.get(event.getView().getTitle()), event.getSlot());
-            if (GuiScreen.isButton(event.getSlot()) || !GuiScreen.isItemPickable(event.getSlot()))
-                event.setCancelled(true);
+        if (event.getCurrentItem() != null) {
+            if (event.getWhoClicked() instanceof Player && !(event.getClickedInventory() instanceof PlayerInventory)) {
+                GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot());
+                if (GuiScreen.isButton(event.getSlot()) || !GuiScreen.isItemPickable(event.getSlot()))
+                    event.setCancelled(true);
+            }
         }
     }
 

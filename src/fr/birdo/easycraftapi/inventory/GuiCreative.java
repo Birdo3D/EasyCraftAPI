@@ -25,7 +25,8 @@ public class GuiCreative extends GuiScreen {
         this.tabPage = 0;
         this.itemsPage = 0;
         this.size = 6 * 9;
-        for (int i = 11; i < 42; i++) {
+        itemsSlots.clear();
+        for (int i = 11; i < 43; i++) {
             if (i != 16 && i != 17 && i != 18 && i != 19 && i != 25 && i != 26 && i != 27 && i != 28 && i != 34 && i != 35 && i != 36 && i != 37)
                 itemsSlots.add(i);
         }
@@ -63,10 +64,9 @@ public class GuiCreative extends GuiScreen {
             }
         }
         //Display items
-        for (int i = this.itemsPage * 20; i < this.itemsPage * 20 + 19; i++)
-            if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size()) {
+        for (int i = this.itemsPage * 20; i < this.itemsPage * 20 + 20; i++)
+            if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size())
                 addItem(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), this.itemsSlots.get(i - (this.itemsPage * 20)));
-            }
     }
 
     @Override
@@ -75,27 +75,13 @@ public class GuiCreative extends GuiScreen {
     }
 
     public void onButtonPressed(int buttonIndex) {
-        /*if (buttonIndex == 0) {
-            this.itemsPage--;
-        } else if (buttonIndex == 1) {
-            this.itemsPage++;
-        } else {
-            this.creativeTab = buttonIndex - 2;
-            for (int tabsSlot : this.indicatorSlots) {
-                if (GuiScreen.getButtonById(buttonIndex).getPos() - 1 == tabsSlot) {
-                    indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() - 1;
-                    break;
-                } else {
-                    indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() + 1;
-                }
-            }
-        }*/
-
         switch (buttonIndex) {
             case 0:
                 this.itemsPage--;
+                break;
             case 1:
                 this.itemsPage++;
+                break;
             default:
                 this.creativeTab = buttonIndex - 2;
                 for (int tabsSlot : this.indicatorSlots) {

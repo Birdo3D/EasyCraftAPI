@@ -1,32 +1,26 @@
 package fr.birdo.easycraftapi.util;
 
-import org.bukkit.ChatColor;
+import fr.birdo.easycraftapi.EasyCraftAPI;
 
 public class Messages {
 
-    private static final String pluginTag = ChatColor.AQUA + "[EasyCraftAPI] ";
+    private static final String pluginTag = "[" + EasyCraftAPI.NAME + "] ";
 
-    public static String enableMessage = pluginTag + "DEBUG : LOADED";
+    public static String enableMessage(String version) {
+        return pluginTag + "DEBUG : PLUGIN LOADED";
+    }
 
-    public static String disableMessage = pluginTag + "DEBUG : UNLOADED";
+    public static String disableMessage = pluginTag + "DEBUG : PLUGIN UNLOADED";
 
-    public static String registeringVanillaItemsMessage = pluginTag + ChatColor.GOLD + "Registering Vanilla Items...";
+    public static String registeringVanillaItemsMessage = pluginTag + "Registering Vanilla Items...";
 
-    public static String registeringVanillaBlocksMessage = pluginTag + ChatColor.GOLD + "Registering Vanilla Blocks...";
+    public static String registeringVanillaBlocksMessage = pluginTag + "Registering Vanilla Blocks...";
 
     public static String registeringItemMessage(String itemName) {
-        return pluginTag + ChatColor.GOLD + "Registering Item " + itemName + "...";
+        return pluginTag + "Registering Item " + itemName + "...";
     }
 
     public static String registeringBlockMessage(String blockName) {
-        return pluginTag + ChatColor.GOLD + "Registering Block " + blockName + "...";
-    }
-
-    public static String registeringGuiMessage(String guiName) {
-        return pluginTag + ChatColor.GOLD + "Registering GuiScreen " + guiName + "...";
-    }
-
-    public static void printMessage(String message) {
-        System.out.println(message);
+        return pluginTag + "Registering Block " + blockName + "...";
     }
 }
