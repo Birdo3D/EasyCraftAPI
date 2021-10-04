@@ -2,9 +2,9 @@ package fr.birdo.easycraftapi.util;
 
 public class BlockPos {
 
-    int x;
-    int y;
-    int z;
+    private final int x;
+    private final int y;
+    private final int z;
 
     public BlockPos(int x, int y, int z) {
         this.x = x;
