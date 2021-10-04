@@ -74,8 +74,10 @@ public class GuiCreative extends GuiScreen {
         }
         //Display items
         for (int i = this.itemsPage * 20; i < this.itemsPage * 20 + 20; i++)
-            if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size())
+            if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size()) {
                 addItem(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), this.itemsSlots.get(i - (this.itemsPage * 20)));
+                setItemPickable(this.itemsSlots.get(i - (this.itemsPage * 20)));
+            }
     }
 
     @Override
