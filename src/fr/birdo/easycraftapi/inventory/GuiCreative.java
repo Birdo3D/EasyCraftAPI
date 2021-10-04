@@ -94,10 +94,12 @@ public class GuiCreative extends GuiScreen {
             case 2:
                 this.tabPage--;
                 this.creativeTab = this.tabPage * 8;
+                this.indicatorSlot = 10;
                 break;
             case 3:
                 this.tabPage++;
                 this.creativeTab = this.tabPage * 8;
+                this.indicatorSlot = 10;
                 break;
             default:
                 this.creativeTab = buttonIndex - 4;
@@ -110,5 +112,7 @@ public class GuiCreative extends GuiScreen {
                     }
                 }
         }
+        if (buttonIndex != 0 && buttonIndex != 1)
+            this.itemsPage = 0;
     }
 }
