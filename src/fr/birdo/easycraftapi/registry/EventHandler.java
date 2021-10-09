@@ -42,32 +42,24 @@ public class EventHandler implements Listener {
                                             if (command.getArgs().get(m).getArgPos() == j - 2 && args[j].equalsIgnoreCase(command.getArgs().get(m).getArg()) && command.getArgs().get(m).getVariant() == i) {
                                                 if (j > 2 && args[j - 1].equalsIgnoreCase(command.getArgs().get(m).getBeforeArg().getArg()))
                                                     argsok++;
-                                                if (j == 2 && argsok == args.length - 3)
-                                                    //System.out.println("C'est tout bon ! : " + command.getArgs().get(args.length - 3).getArg());
-                                                    //command.onCommandExecuted(e.getPlayer(), i, args.length - 3);
-                                                    e.setCancelled(command.onCommandExecuted(e.getPlayer(), i, args.length - 3));
+                                                if (j == 2 && argsok == args.length - 3)//Si tout est bon
+                                                    e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, args.length - 3));
                                             }
                                         }
                                     }
                                 } else {//Si il y a un seul argument
                                     for (int m = 0; m < command.getArgs().size(); m++) {//Pour chaque argument
                                         if (command.getArgs().get(m).getArgPos() == 0 && args[2].equalsIgnoreCase(command.getArgs().get(m).getArg()))
-                                            //System.out.println("C'est le premier arg et c'est ok");
-                                            //command.onCommandExecuted(e.getPlayer(), i, 0);
-                                            e.setCancelled(command.onCommandExecuted(e.getPlayer(), i, 0));
+                                            e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, 0));
                                     }
                                 }
-                            } else
-                                //System.out.println("il n'y a pas d'arg, juste des variants");
-                                //command.onCommandExecuted(e.getPlayer(), i, -1);
-                                e.setCancelled(command.onCommandExecuted(e.getPlayer(), i, -1));
+                            } else //Si il y a seulement un variant
+                                e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, -1));
                         }
                     }
 
-                } else if (args.length == 1)
-                    //System.out.println("il y a juste la commande");
-                    //command.onCommandExecuted(e.getPlayer(), -1, -1);
-                    e.setCancelled(command.onCommandExecuted(e.getPlayer(), -1, -1));
+                } else if (args.length == 1)//Si il y a seulement la commande
+                    e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, -1, -1));
             }
         }
     }

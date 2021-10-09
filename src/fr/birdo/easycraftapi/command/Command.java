@@ -35,7 +35,7 @@ public class Command {
         return this;
     }
 
-    public boolean onCommandExecuted(Player player, int variantIndex, int argsIndex) {
+    public boolean onCommandExecuted(Player player, String[] args, int variantIndex, int argsIndex) {
         return false;
     }
 

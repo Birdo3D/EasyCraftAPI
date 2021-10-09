@@ -4,6 +4,3 @@ version: 1.0
 author: Birdo
 api-version: 1.16
 prefix: EasyCraftAPI
-commands:
-  creative:
-    description: Plugin commands
