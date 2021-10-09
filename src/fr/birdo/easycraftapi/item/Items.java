@@ -96,6 +96,10 @@ public class Items {
         return this;
     }
 
+    public int getMaxStackSize(){
+        return this.maxStackSize;
+    }
+
     public boolean isUnbreakable() {
         return this.unbreakable;
     }

@@ -3,10 +3,12 @@ package fr.birdo.easycraftapi.registry;
 import fr.birdo.easycraftapi.EasyCraftAPI;
 import fr.birdo.easycraftapi.command.Command;
 import fr.birdo.easycraftapi.inventory.GuiScreen;
+import fr.birdo.easycraftapi.item.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 public class EventHandler implements Listener {
@@ -21,6 +23,11 @@ public class EventHandler implements Listener {
                 GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot());
                 if (GuiScreen.isButton(event.getSlot()) || !GuiScreen.isItemPickable(event.getSlot()))
                     event.setCancelled(true);
+                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor() != null) {
+                    ItemStack itemStack = Item.getStackFromItem(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor()).clone();
+                    itemStack.setAmount(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursorAmount());
+                    event.setCursor(itemStack);
+                }
             }
         }
     }
@@ -57,7 +64,6 @@ public class EventHandler implements Listener {
                                 e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, -1));
                         }
                     }
-
                 } else if (args.length == 1)//Si il y a seulement la commande
                     e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, -1, -1));
             }

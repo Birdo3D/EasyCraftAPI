@@ -4,6 +4,7 @@ import fr.birdo.easycraftapi.entity.PlayerHelper;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.registry.GameRegistry;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,6 +95,14 @@ public class GuiScreen extends PlayerHelper {
             if (buttons.get(i).getPos() == slotIndex)
                 return true;
         return false;
+    }
+
+    public Items setItemInCursor(){
+        return null;
+    }
+
+    public int setItemInCursorAmount(){
+        return 0;
     }
 
     public static int getIdByName(String name) {

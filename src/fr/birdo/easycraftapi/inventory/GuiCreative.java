@@ -15,6 +15,7 @@ public class GuiCreative extends GuiScreen {
     private int itemsPage;
     private int tabPage;
     private int indicatorSlot;
+    private Items itemInCursor;
     private final int[] tabsSlots = new int[]{9, 17, 18, 26, 27, 35, 36, 44};
     private final List<Integer> itemsSlots = new ArrayList<>();
     private final int[] indicatorSlots = new int[]{10, 16, 19, 25, 28, 34, 37, 43};
@@ -32,6 +33,7 @@ public class GuiCreative extends GuiScreen {
     }
 
     public void drawScreen() {
+        this.itemInCursor = null; //ça, ça va pas ;)
         //Set gui size
         setGuiSize(this.size);
         //Draw creative tabs buttons
@@ -73,10 +75,11 @@ public class GuiCreative extends GuiScreen {
             }
         }
         //Display items
+        int j = 0;
         for (int i = this.itemsPage * 20; i < this.itemsPage * 20 + 20; i++)
             if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size()) {
-                addItem(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), this.itemsSlots.get(i - (this.itemsPage * 20)));
-                setItemPickable(this.itemsSlots.get(i - (this.itemsPage * 20)));
+                addButton(new GuiButton(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), CreativeTabs.getNextID() + 4 + j, this.itemsSlots.get(i - (this.itemsPage * 20))));
+                j++;
             }
     }
 
@@ -86,6 +89,7 @@ public class GuiCreative extends GuiScreen {
     }
 
     public void onButtonPressed(int buttonIndex) {
+        System.out.println(buttonIndex);
         switch (buttonIndex) {
             case 0:
                 this.itemsPage--;
@@ -104,17 +108,32 @@ public class GuiCreative extends GuiScreen {
                 this.indicatorSlot = 10;
                 break;
             default:
-                this.creativeTab = buttonIndex - 4;
-                for (int tabsSlot : this.indicatorSlots) {
-                    if (GuiScreen.getButtonById(buttonIndex).getPos() - 1 == tabsSlot) {
-                        indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() - 1;
-                        break;
-                    } else {
-                        indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() + 1;
+                if (!(buttonIndex >= CreativeTabs.getNextID() + 4)) {
+                    this.creativeTab = buttonIndex - 4;
+                    for (int tabsSlot : this.indicatorSlots) {
+                        if (GuiScreen.getButtonById(buttonIndex).getPos() - 1 == tabsSlot) {
+                            indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() - 1;
+                            break;
+                        } else {
+                            indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() + 1;
+                        }
                     }
                 }
         }
         if (buttonIndex != 0 && buttonIndex != 1)
             this.itemsPage = 0;
+        if (buttonIndex >= CreativeTabs.getNextID() + 4)
+            this.itemInCursor = GuiScreen.getButtonById(buttonIndex).getItem();
+    }
+
+    public Items setItemInCursor() {
+        return this.itemInCursor;
+    }
+
+    public int setItemInCursorAmount() {
+        if (this.itemInCursor != null)
+            return this.itemInCursor.getMaxStackSize();
+        else
+            return 0;
     }
 }
