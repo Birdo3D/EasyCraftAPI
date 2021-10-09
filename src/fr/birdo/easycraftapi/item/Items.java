@@ -1,6 +1,5 @@
 package fr.birdo.easycraftapi.item;
 
-import fr.birdo.easycraftapi.block.Blocks;
 import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.util.BlockPos;
 import org.bukkit.Material;
@@ -34,15 +33,6 @@ public class Items {
     public static Items D1I5AM1OND = new Items(Material.DIAMOND, 19).setCreativeTab(CreativeTabs.BLOCKS);
     public static Items DIA1MO15ND = new Items(Material.DIAMOND, 20).setCreativeTab(CreativeTabs.BLOCKS);
     public static Items DIAM1115ND = new Items(Material.DIAMOND, 21).setCreativeTab(CreativeTabs.BLOCKS);
-
-    //Items Blocks
-    public static Items STONE_ITEM = new ItemBlock(Blocks.STONE, Material.STONE);
-    public static Items GRANITE_ITEM = new ItemBlock(Blocks.GRANITE, Material.GRANITE);
-    public static Items POLISHED_GRANITE_ITEM = new ItemBlock(Blocks.POLISHED_GRANITE, Material.POLISHED_GRANITE);
-    public static Items DIORITE_ITEM = new ItemBlock(Blocks.DIORITE, Material.DIORITE);
-    public static Items POLISHED_DIORITE_ITEM = new ItemBlock(Blocks.POLISHED_DIORITE, Material.POLISHED_DIORITE);
-    public static Items ANDESITE_ITEM = new ItemBlock(Blocks.ANDESITE, Material.ANDESITE);
-    public static Items POLISHED_ANDESITE_ITEM = new ItemBlock(Blocks.POLISHED_ANDESITE, Material.POLISHED_ANDESITE);
 
     Material material;
     int id;

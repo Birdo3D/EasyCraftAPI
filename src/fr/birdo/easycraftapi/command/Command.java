@@ -2,7 +2,9 @@ package fr.birdo.easycraftapi.command;
 
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Command {
@@ -12,7 +14,7 @@ public class Command {
 
     private static String command;
     private static final Map<Integer, String> variants = new HashMap<>();
-    private static final Map<Integer, String> args = new HashMap<>();
+    private final List<CommandArg> args = new ArrayList<>();
     private int index;
 
     public Command() {
@@ -28,19 +30,20 @@ public class Command {
         return this;
     }
 
-    public Command addArg(int index, String arg) {
-        args.put(index, arg);
+    public Command addArg(CommandArg arg) {
+        this.args.add(arg);
         return this;
     }
 
-    public void onCommandExecuted(Player player, int variantIndex, int argsIndex) {
+    public boolean onCommandExecuted(Player player, int variantIndex, int argsIndex) {
+        return false;
     }
 
     public String getCommand() {
         return command;
     }
 
-    public int getCommandIndex(){
+    public int getCommandIndex() {
         return index;
     }
 
@@ -48,15 +51,19 @@ public class Command {
         return variants.size();
     }
 
-    public int getArgsSize(int variantIndex) {
-        return args.size();
-    }
-
     public String getVariant(int index) {
         return variants.get(index);
     }
 
-    public String getArg(int variantIndex, int index) {
-        return args.get(index);
+    public List<CommandArg> getArgs() {
+        return this.args;
+    }
+
+    public int getMaxArgPos() {
+        int i = 0;
+        for (CommandArg arg : this.args)
+            if (arg.getArgPos() > i)
+                i = arg.getArgPos();
+        return i;
     }
 }
