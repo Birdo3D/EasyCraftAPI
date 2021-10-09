@@ -58,12 +58,4 @@ public class Command {
     public List<CommandArg> getArgs() {
         return this.args;
     }
-
-    public int getMaxArgPos() {
-        int i = 0;
-        for (CommandArg arg : this.args)
-            if (arg.getArgPos() > i)
-                i = arg.getArgPos();
-        return i;
-    }
 }

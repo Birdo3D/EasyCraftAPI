@@ -1,7 +1,5 @@
 package fr.birdo.easycraftapi;
 
-import fr.birdo.easycraftapi.command.Command;
-import fr.birdo.easycraftapi.command.CommandCompleter;
 import fr.birdo.easycraftapi.command.CommandCreative;
 import fr.birdo.easycraftapi.inventory.GuiCreative;
 import fr.birdo.easycraftapi.registry.EventHandler;
@@ -9,7 +7,6 @@ import fr.birdo.easycraftapi.registry.GameRegistry;
 import fr.birdo.easycraftapi.util.Messages;
 import fr.birdo.easycraftapi.util.Ticking;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -32,8 +29,6 @@ public class EasyCraftAPI extends JavaPlugin {
         GAME_REGISTRY.vanillaRegistering();
         GAME_REGISTRY.registerCommand(PLUGINID, new CommandCreative());
         GAME_REGISTRY.registerGui(PLUGINID, new GuiCreative(), 1);
-        //for (Command command : GameRegistry.registeredCommands.values())
-            //this.getCommand("creative").setTabCompleter(new CommandCompleter());
         Ticking.tick();
         logger.log(Level.INFO, Messages.enableMessage(VERSION));
     }

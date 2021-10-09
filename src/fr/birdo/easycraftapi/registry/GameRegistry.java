@@ -47,7 +47,7 @@ public class GameRegistry {
         registerVanillaItems(Items.DIAM1115ND);
     }
 
-    public void registerItems(String pluginIndex, Items item) {
+    public void registerItem(String pluginIndex, Items item) {
         registeredItems.put(item.getId(), item);
         instance.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
     }
