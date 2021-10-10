@@ -1,12 +1,13 @@
 package fr.birdo.easycraftapi.item;
 
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Item {
 
     public static ItemStack getStackFromItem(Items item) {
-        ItemStack itemStack = new ItemStack(item.getMaterial(), 1 , (byte)item.getMaterialMeta());
+        ItemStack itemStack = new ItemStack(item.getMaterial(), 1, (byte) item.getMaterialMeta());
         ItemMeta itemStackMeta = itemStack.getItemMeta();
         itemStackMeta.setDisplayName(item.getName());
         itemStackMeta.setLore(item.getLore());
@@ -15,6 +16,9 @@ public class Item {
             for (int i = 0; i < item.getEnchantments().size(); i++)
                 itemStackMeta.addEnchant(item.getEnchantments().get(i), item.getEnchantmentLevel(item.getEnchantments().get(i)), true);
         }
+        for (ItemFlag flag : ItemFlag.values())
+            if (item.hasItemFlag(flag))
+                itemStackMeta.addItemFlags(flag);
         itemStack.setItemMeta(itemStackMeta);
         return itemStack;
     }

@@ -1,7 +1,6 @@
 package fr.birdo.easycraftapi;
 
 import fr.birdo.easycraftapi.command.CommandCreative;
-import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.inventory.GuiCreative;
 import fr.birdo.easycraftapi.registry.EventHandler;
 import fr.birdo.easycraftapi.registry.GameRegistry;

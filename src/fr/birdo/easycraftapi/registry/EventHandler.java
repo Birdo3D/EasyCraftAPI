@@ -4,10 +4,13 @@ import fr.birdo.easycraftapi.EasyCraftAPI;
 import fr.birdo.easycraftapi.command.Command;
 import fr.birdo.easycraftapi.inventory.GuiScreen;
 import fr.birdo.easycraftapi.item.Item;
+import fr.birdo.easycraftapi.item.Items;
+import fr.birdo.easycraftapi.util.BlockPos;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -69,5 +72,17 @@ public class EventHandler implements Listener {
                     e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, -1, -1));
             }
         }
+    }
+
+    @org.bukkit.event.EventHandler
+    public void onItemUse(PlayerInteractEvent event) {
+        for (Items item : GameRegistry.registeredItems.values())
+            if (event.getItem() != null)
+                if (event.getItem().isSimilar(Item.getStackFromItem(item))) {
+                    BlockPos pos = new BlockPos(0, 0, 0);
+                    if (event.getClickedBlock() != null)
+                        pos = new BlockPos(event.getClickedBlock().getX(), event.getClickedBlock().getY(), event.getClickedBlock().getZ());
+                    item.onItemUse(event.getPlayer(), pos, event.getBlockFace(), event.getAction(), event.getHand());
+                }
     }
 }

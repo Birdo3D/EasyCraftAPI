@@ -2,11 +2,16 @@ package fr.birdo.easycraftapi.item;
 
 import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.util.BlockPos;
+import net.minecraft.server.v1_16_R3.EnumHand;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -25,15 +30,14 @@ public class Items {
     private String name;
     private final List<Enchantment> enchantments = new ArrayList<>();
     private final Map<Enchantment, Integer> enchantmentsLevel = new HashMap<>();
+    private final Map<ItemFlag, Boolean> itemFlags = new HashMap<>();
     private final List<CreativeTabs> creativeTabs = new ArrayList<>();
     private List<String> lore = new ArrayList<>();
     private boolean unbreakable;
     private int maxStackSize = 64;
     private int maxDamage;
-    private boolean hasSubtypes;
 
     public Items() {
-
     }
 
     public Items(Material material, int id) {
@@ -61,6 +65,11 @@ public class Items {
         return this;
     }
 
+    public Items hideEnchants(boolean hide) {
+        this.itemFlags.put(ItemFlag.HIDE_ENCHANTS, hide);
+        return this;
+    }
+
     public Items setCreativeTab(CreativeTabs tab) {
         this.creativeTabs.add(tab);
         return this;
@@ -76,12 +85,17 @@ public class Items {
         return this;
     }
 
-    public Items setUnbreakable(boolean unbreakable) {
+    public int getMaxDamage() {
+        return this.maxDamage;
+    }
+
+    public Items setUnbreakable(boolean unbreakable, boolean hide) {
         this.unbreakable = unbreakable;
+        this.itemFlags.put(ItemFlag.HIDE_UNBREAKABLE, hide);
         return this;
     }
 
-    public int getMaxStackSize(){
+    public int getMaxStackSize() {
         return this.maxStackSize;
     }
 
@@ -101,15 +115,6 @@ public class Items {
         return this.lore;
     }
 
-    public Items hasSubtypes(boolean hasSubtypes) {
-        this.hasSubtypes = hasSubtypes;
-        return this;
-    }
-
-    public int getMetadata(int damage) {
-        return 0;
-    }
-
     public String getName() {
         return name;
     }
@@ -126,6 +131,12 @@ public class Items {
         return enchantments.size() != 0;
     }
 
+    public Boolean hasItemFlag(ItemFlag itemFlag){
+        if(this.itemFlags.containsKey(itemFlag))
+            return this.itemFlags.get(itemFlag);
+        return false;
+    }
+
     public List<Enchantment> getEnchantments() {
         return enchantments;
     }
@@ -134,10 +145,7 @@ public class Items {
         return this.enchantmentsLevel.get(enchantment);
     }
 
-    public void onItemUse(Player player, World worldIn, BlockPos pos) {
-    }
-
-    public void onItemRightClick(World worldIn, Player playerIn) {
+    public void onItemUse(Player player, BlockPos pos, BlockFace blockFace, Action action, EquipmentSlot hand) {
     }
 
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
