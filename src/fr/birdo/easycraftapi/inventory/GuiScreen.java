@@ -4,7 +4,6 @@ import fr.birdo.easycraftapi.entity.PlayerHelper;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.registry.GameRegistry;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,12 +96,15 @@ public class GuiScreen extends PlayerHelper {
         return false;
     }
 
-    public Items setItemInCursor(){
+    public Items setItemInCursor() {
         return null;
     }
 
-    public int setItemInCursorAmount(){
+    public int setItemInCursorAmount() {
         return 0;
+    }
+
+    public void itemHasBeenSetInCursor(Items item, int quantity) {
     }
 
     public static int getIdByName(String name) {

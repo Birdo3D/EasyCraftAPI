@@ -11,10 +11,10 @@ public class Item {
         itemStackMeta.setDisplayName(item.getName());
         itemStackMeta.setLore(item.getLore());
         itemStackMeta.setUnbreakable(item.isUnbreakable());
-        /*if (item.hasEnchantment()) {
+        if (item.hasEnchantment()) {
             for (int i = 0; i < item.getEnchantments().size(); i++)
                 itemStackMeta.addEnchant(item.getEnchantments().get(i), item.getEnchantmentLevel(item.getEnchantments().get(i)), true);
-        }*/
+        }
         itemStack.setItemMeta(itemStackMeta);
         return itemStack;
     }

@@ -33,7 +33,6 @@ public class GuiCreative extends GuiScreen {
     }
 
     public void drawScreen() {
-        this.itemInCursor = null; //ça, ça va pas ;)
         //Set gui size
         setGuiSize(this.size);
         //Draw creative tabs buttons
@@ -80,7 +79,8 @@ public class GuiCreative extends GuiScreen {
             if (i < CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).size()) {
                 addButton(new GuiButton(CreativeTabs.displayAllRelevantItems(CreativeTabs.getTabById(this.creativeTab)).get(i), CreativeTabs.getNextID() + 4 + j, this.itemsSlots.get(i - (this.itemsPage * 20))));
                 j++;
-            }
+            } else
+                addItem(new Items(Material.LIGHT_GRAY_STAINED_GLASS_PANE, -1).setName(" "), this.itemsSlots.get(i - (this.itemsPage * 20)));
     }
 
     @Override
@@ -89,7 +89,6 @@ public class GuiCreative extends GuiScreen {
     }
 
     public void onButtonPressed(int buttonIndex) {
-        System.out.println(buttonIndex);
         switch (buttonIndex) {
             case 0:
                 this.itemsPage--;
@@ -135,5 +134,10 @@ public class GuiCreative extends GuiScreen {
             return this.itemInCursor.getMaxStackSize();
         else
             return 0;
+    }
+
+    public void itemHasBeenSetInCursor(Items item, int quantity) {
+        if (item == this.itemInCursor && quantity == this.itemInCursor.getMaxStackSize())
+            this.itemInCursor = null;
     }
 }

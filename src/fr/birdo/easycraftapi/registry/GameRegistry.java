@@ -30,21 +30,6 @@ public class GameRegistry {
         instance.logger.log(Level.INFO, Messages.registeringVanillaItemsMessage);
 
         registerVanillaItems(Items.DIAMOND);
-
-        registerVanillaItems(Items.DIAM1OND);
-        registerVanillaItems(Items.DIA1MOND);
-        registerVanillaItems(Items.DIAM11OND);
-        registerVanillaItems(Items.DI1AMOND);
-        registerVanillaItems(Items.DIAMO1ND);
-        registerVanillaItems(Items.DIAM11ON1D);
-        registerVanillaItems(Items.D1IAM1OND);
-        registerVanillaItems(Items.DIA1MO1ND);
-        registerVanillaItems(Items.DIAM111ND);
-        registerVanillaItems(Items.DIA5MO1ND);
-        registerVanillaItems(Items.DIAM511ON1D);
-        registerVanillaItems(Items.D1I5AM1OND);
-        registerVanillaItems(Items.DIA1MO15ND);
-        registerVanillaItems(Items.DIAM1115ND);
     }
 
     public void registerItem(String pluginIndex, Items item) {

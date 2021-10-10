@@ -70,13 +70,6 @@ public class CreativeTabs {
         }
     });
 
-    public static final CreativeTabs CREATIVET = (new CreativeTabs(8, "CreativeT") {
-        @Override
-        public Items getTabIconItem() {
-            return new Items(Material.APPLE, -1);
-        }
-    });
-
     public CreativeTabs() {
     }
 

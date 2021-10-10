@@ -27,6 +27,7 @@ public class EventHandler implements Listener {
                     ItemStack itemStack = Item.getStackFromItem(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor()).clone();
                     itemStack.setAmount(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursorAmount());
                     event.setCursor(itemStack);
+                    GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).itemHasBeenSetInCursor(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursorAmount());
                 }
             }
         }
