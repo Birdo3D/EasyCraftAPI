@@ -107,6 +107,9 @@ public class GuiScreen extends PlayerHelper {
     public void itemHasBeenSetInCursor(Items item, int quantity) {
     }
 
+    public void onTick(int tick) {
+    }
+
     public static int getIdByName(String name) {
         for (int i : GameRegistry.registeredGuis.keySet()) {
             if (GameRegistry.registeredGuis.get(i).getCustomName().equalsIgnoreCase(name)) {

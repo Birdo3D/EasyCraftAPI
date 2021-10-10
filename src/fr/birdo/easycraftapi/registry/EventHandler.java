@@ -83,6 +83,7 @@ public class EventHandler implements Listener {
                     if (event.getClickedBlock() != null)
                         pos = new BlockPos(event.getClickedBlock().getX(), event.getClickedBlock().getY(), event.getClickedBlock().getZ());
                     item.onItemUse(event.getPlayer(), pos, event.getBlockFace(), event.getAction(), event.getHand());
+                    item.onUpdate(event.getPlayer());
                 }
     }
 }

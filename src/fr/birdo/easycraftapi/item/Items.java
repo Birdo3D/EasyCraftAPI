@@ -2,9 +2,7 @@ package fr.birdo.easycraftapi.item;
 
 import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.util.BlockPos;
-import net.minecraft.server.v1_16_R3.EnumHand;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -12,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -131,8 +128,8 @@ public class Items {
         return enchantments.size() != 0;
     }
 
-    public Boolean hasItemFlag(ItemFlag itemFlag){
-        if(this.itemFlags.containsKey(itemFlag))
+    public Boolean hasItemFlag(ItemFlag itemFlag) {
+        if (this.itemFlags.containsKey(itemFlag))
             return this.itemFlags.get(itemFlag);
         return false;
     }
@@ -148,9 +145,12 @@ public class Items {
     public void onItemUse(Player player, BlockPos pos, BlockFace blockFace, Action action, EquipmentSlot hand) {
     }
 
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void onUpdate(Entity entityIn) {
     }
 
-    public void onCreated(ItemStack stack, World worldIn, Player playerIn) {
+    public void onTick(int tick) {
+    }
+
+    public void onCreated(Player playerIn, String type) {
     }
 }
