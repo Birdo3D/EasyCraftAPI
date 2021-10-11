@@ -63,8 +63,8 @@ public class GuiScreen extends PlayerHelper {
     }
 
     public static void buttonIsPressed(Player player, GuiScreen gui, int slotIndex) {
-        if (isButton(slotIndex)) {
-            for (GuiButton guiButton : buttons.values()) {
+        if (isButton(gui, slotIndex)) {
+            for (GuiButton guiButton : gui.getButtons().values()) {
                 if (guiButton.getPos() == slotIndex) {
                     gui.onButtonPressed(guiButton.getId());
                     PlayerHelper.updateGui(player, gui);
@@ -85,14 +85,15 @@ public class GuiScreen extends PlayerHelper {
         return this;
     }
 
-    public static boolean isItemPickable(int slotIndex) {
+    public Boolean isItemPickable(int slotIndex) {
         return pickable.contains(slotIndex);
     }
 
-    public static boolean isButton(int slotIndex) {
-        for (int i : buttons.keySet())
-            if (buttons.get(i).getPos() == slotIndex)
-                return true;
+    public static boolean isButton(GuiScreen guiScreen, int slotIndex) {
+        if (guiScreen != null && guiScreen.getButtons().size() != 0)
+            for (int i : guiScreen.getButtons().keySet())
+                if (guiScreen.getButtons().get(i).getPos() == slotIndex)
+                    return true;
         return false;
     }
 
@@ -117,6 +118,10 @@ public class GuiScreen extends PlayerHelper {
             }
         }
         return -1;
+    }
+
+    private Map<Integer, GuiButton> getButtons() {
+        return buttons;
     }
 
     public static int getId(GuiScreen gui) {

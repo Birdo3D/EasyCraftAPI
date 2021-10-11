@@ -6,7 +6,6 @@ import fr.birdo.easycraftapi.inventory.GuiScreen;
 import fr.birdo.easycraftapi.item.Item;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.util.BlockPos;
-import net.minecraft.server.v1_16_R3.InventoryLargeChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -60,9 +59,9 @@ public class EventHandler implements Listener {
                 }
             } else if (!(event.getClickedInventory() instanceof PlayerInventory)) {
                 GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot());
-                if (GuiScreen.isButton(event.getSlot()) || !GuiScreen.isItemPickable(event.getSlot()))
+                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())) != null && (GuiScreen.isButton(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot()) || !GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).isItemPickable(event.getSlot())))
                     event.setCancelled(true);
-                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor() != null) {
+                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())) != null && GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor() != null) {
                     ItemStack itemStack = Item.getStackFromItem(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor()).clone();
                     itemStack.setAmount(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursorAmount());
                     event.setCursor(itemStack);
