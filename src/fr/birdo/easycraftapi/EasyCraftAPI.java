@@ -2,11 +2,14 @@ package fr.birdo.easycraftapi;
 
 import fr.birdo.easycraftapi.command.CommandCreative;
 import fr.birdo.easycraftapi.inventory.GuiCreative;
+import fr.birdo.easycraftapi.item.Items;
+import fr.birdo.easycraftapi.recipe.AnvilRecipes;
 import fr.birdo.easycraftapi.registry.EventHandler;
 import fr.birdo.easycraftapi.registry.GameRegistry;
 import fr.birdo.easycraftapi.util.Messages;
 import fr.birdo.easycraftapi.util.Ticking;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -26,9 +29,11 @@ public class EasyCraftAPI extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventHandler(this), this);
         getServer().getPluginManager().registerEvents(new Ticking(this), this);
         new GameRegistry(this);
+        saveDefaultConfig();
         GAME_REGISTRY.vanillaRegistering();
         GAME_REGISTRY.registerCommand(PLUGINID, new CommandCreative());
         GAME_REGISTRY.registerGui(PLUGINID, new GuiCreative(), 1);
+        GAME_REGISTRY.registerRecipe(PLUGINID, new AnvilRecipes(new Items(Material.APPLE, -1)).setItemLeft(new Items(Material.COBBLESTONE, -1)).setItemRight(Items.DIAMOND));
         Ticking.tick();
         logger.log(Level.INFO, Messages.enableMessage(VERSION));
     }

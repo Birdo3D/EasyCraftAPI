@@ -1,6 +1,7 @@
 package fr.birdo.easycraftapi.util;
 
 import fr.birdo.easycraftapi.EasyCraftAPI;
+import fr.birdo.easycraftapi.block.Blocks;
 import fr.birdo.easycraftapi.inventory.GuiScreen;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.registry.GameRegistry;
@@ -20,6 +21,8 @@ public class Ticking implements Listener {
         count = Bukkit.getScheduler().scheduleSyncRepeatingTask(instance, () -> {
             for (Items item : GameRegistry.registeredItems.values())
                 item.onTick(count);
+            for (Blocks block : GameRegistry.registeredBlocks.values())
+                block.onTick(count);
             for (GuiScreen guiScreen : GameRegistry.registeredGuis.values())
                 guiScreen.onTick(count);
             if (count > 1000000000)

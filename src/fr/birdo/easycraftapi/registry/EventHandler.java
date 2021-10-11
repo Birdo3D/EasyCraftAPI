@@ -6,13 +6,18 @@ import fr.birdo.easycraftapi.inventory.GuiScreen;
 import fr.birdo.easycraftapi.item.Item;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.util.BlockPos;
+import net.minecraft.server.v1_16_R3.InventoryLargeChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+import java.util.Objects;
 
 public class EventHandler implements Listener {
 
@@ -21,8 +26,39 @@ public class EventHandler implements Listener {
 
     @org.bukkit.event.EventHandler
     public void guiClicked(InventoryClickEvent event) {
-        if (event.getCurrentItem() != null) {
-            if (event.getWhoClicked() instanceof Player && !(event.getClickedInventory() instanceof PlayerInventory)) {
+        if (event.getCurrentItem() != null && event.getWhoClicked() instanceof Player) {
+            if (event.getClickedInventory() instanceof AnvilInventory) {
+                AnvilInventory anvilInventory = (AnvilInventory) event.getClickedInventory();
+                if (event.getSlot() == 2) {
+                    for (int i = 0; i < GameRegistry.registeredAnvilRecipes.size(); i++) {
+                        if (anvilInventory.getItem(2) != null) {
+                            if (Objects.requireNonNull(anvilInventory.getItem(2)).isSimilar(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()))) {
+                                if (anvilInventory.getContents()[0] != null) {
+                                    if (anvilInventory.getContents()[0].equals(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemLeft()))) {
+                                        if (GameRegistry.registeredAnvilRecipes.get(i).getItemRight() != null) {
+                                            if (anvilInventory.getContents()[1] != null && Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight()).equals(anvilInventory.getContents()[1])) {
+                                                event.setCursor(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                                                anvilInventory.setItem(0, null);
+                                                ItemStack itemSlot1 = Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight());
+                                                itemSlot1.setAmount(anvilInventory.getItem(1).getAmount() - 1);
+                                                anvilInventory.setItem(1, itemSlot1);
+                                                anvilInventory.setItem(2, null);
+                                            }
+                                        } else if (anvilInventory.getContents()[1] == null) {
+                                            event.setCursor(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                                            anvilInventory.setItem(0, null);
+                                            ItemStack itemSlot1 = Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight());
+                                            itemSlot1.setAmount(anvilInventory.getItem(1).getAmount() - 1);
+                                            anvilInventory.setItem(1, itemSlot1);
+                                            anvilInventory.setItem(2, null);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if (!(event.getClickedInventory() instanceof PlayerInventory)) {
                 GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot());
                 if (GuiScreen.isButton(event.getSlot()) || !GuiScreen.isItemPickable(event.getSlot()))
                     event.setCancelled(true);
@@ -85,5 +121,23 @@ public class EventHandler implements Listener {
                     item.onItemUse(event.getPlayer(), pos, event.getBlockFace(), event.getAction(), event.getHand());
                     item.onUpdate(event.getPlayer());
                 }
+    }
+
+    @org.bukkit.event.EventHandler
+    public void customAnvilRecipe(PrepareAnvilEvent e) {
+        ItemStack[] contents = e.getInventory().getContents();
+        if (contents[0] != null) {
+            for (int i = 0; i < GameRegistry.registeredAnvilRecipes.size(); i++) {
+                if (Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemLeft()).equals(contents[0])) {
+                    if (GameRegistry.registeredAnvilRecipes.get(i).getItemRight() != null) {
+                        if (contents[1] != null && Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight()).equals(contents[1])) {
+                            e.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                        }
+                    } else if (contents[1] == null) {
+                        e.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                    }
+                }
+            }
+        }
     }
 }
