@@ -11,7 +11,7 @@ public class CommandCreative extends Command {
         addVariant(0, "inv");
     }
 
-    public boolean onCommandExecuted(Player player, String[] args, int variantIndex, int argsIndex) {
+    public Boolean onCommandExecuted(Player player, String[] args, int variantIndex, int argsIndex) {
         if (variantIndex == 0 && argsIndex == -1) {
             if (player.isOp())
                 PlayerHelper.displayGui(player, 1);

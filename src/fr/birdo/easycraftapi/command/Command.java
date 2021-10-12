@@ -12,8 +12,8 @@ public class Command {
     //command variant1 arg1 arg2
     //command variant2 arg1
 
-    private static String command;
-    private static final Map<Integer, String> variants = new HashMap<>();
+    private String command;
+    private final Map<Integer, String> variants = new HashMap<>();
     private final List<CommandArg> args = new ArrayList<>();
     private int index;
 
@@ -35,7 +35,7 @@ public class Command {
         return this;
     }
 
-    public boolean onCommandExecuted(Player player, String[] args, int variantIndex, int argsIndex) {
+    public Boolean onCommandExecuted(Player player, String[] args, int variantIndex, int argsIndex) {
         return false;
     }
 
