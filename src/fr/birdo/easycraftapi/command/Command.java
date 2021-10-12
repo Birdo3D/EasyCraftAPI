@@ -12,13 +12,10 @@ public class Command {
     //command variant1 arg1 arg2
     //command variant2 arg1
 
-    private String command;
+    private final String command;
     private final Map<Integer, String> variants = new HashMap<>();
     private final List<CommandArg> args = new ArrayList<>();
-    private int index;
-
-    public Command() {
-    }
+    private final int index;
 
     public Command(String commandIn, int index) {
         command = commandIn;
