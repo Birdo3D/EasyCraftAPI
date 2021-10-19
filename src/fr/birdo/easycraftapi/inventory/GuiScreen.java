@@ -13,9 +13,9 @@ import java.util.Map;
 public class GuiScreen extends PlayerHelper {
 
     private int size;
-    private static final Map<Integer, GuiButton> buttons = new HashMap<>();
-    private static final List<Integer> pickable = new ArrayList<>();
-    public static final Map<Integer, Items> items = new HashMap<>();
+    private final Map<Integer, GuiButton> buttons = new HashMap<>();
+    private final List<Integer> pickable = new ArrayList<>();
+    private final Map<Integer, Items> items = new HashMap<>();
 
     public void initGui() {
     }
@@ -58,11 +58,11 @@ public class GuiScreen extends PlayerHelper {
         items.put(text.getPos(), text.getItem());
     }
 
-    public static GuiButton getButtonById(int index) {
-        return buttons.get(index);
+    public GuiButton getButtonById(int index) {
+        return this.buttons.get(index);
     }
 
-    public static void buttonIsPressed(Player player, GuiScreen gui, int slotIndex) {
+    public void buttonIsPressed(Player player, GuiScreen gui, int slotIndex) {
         if (isButton(gui, slotIndex)) {
             for (GuiButton guiButton : gui.getButtons().values()) {
                 if (guiButton.getPos() == slotIndex) {
@@ -89,7 +89,7 @@ public class GuiScreen extends PlayerHelper {
         return pickable.contains(slotIndex);
     }
 
-    public static boolean isButton(GuiScreen guiScreen, int slotIndex) {
+    public boolean isButton(GuiScreen guiScreen, int slotIndex) {
         if (guiScreen != null && guiScreen.getButtons().size() != 0)
             for (int i : guiScreen.getButtons().keySet())
                 if (guiScreen.getButtons().get(i).getPos() == slotIndex)
@@ -131,5 +131,9 @@ public class GuiScreen extends PlayerHelper {
             }
         }
         return -1;
+    }
+
+    public Map<Integer, Items> getItems(){
+        return this.items;
     }
 }

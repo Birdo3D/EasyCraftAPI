@@ -110,11 +110,11 @@ public class GuiCreative extends GuiScreen {
                 if (!(buttonIndex >= CreativeTabs.getNextID() + 4)) {
                     this.creativeTab = buttonIndex - 4;
                     for (int tabsSlot : this.indicatorSlots) {
-                        if (GuiScreen.getButtonById(buttonIndex).getPos() - 1 == tabsSlot) {
-                            indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() - 1;
+                        if (this.getButtonById(buttonIndex).getPos() - 1 == tabsSlot) {
+                            indicatorSlot = this.getButtonById(buttonIndex).getPos() - 1;
                             break;
                         } else {
-                            indicatorSlot = GuiScreen.getButtonById(buttonIndex).getPos() + 1;
+                            indicatorSlot = this.getButtonById(buttonIndex).getPos() + 1;
                         }
                     }
                 }
@@ -122,7 +122,7 @@ public class GuiCreative extends GuiScreen {
         if (buttonIndex != 0 && buttonIndex != 1)
             this.itemsPage = 0;
         if (buttonIndex >= CreativeTabs.getNextID() + 4)
-            this.itemInCursor = GuiScreen.getButtonById(buttonIndex).getItem();
+            this.itemInCursor = this.getButtonById(buttonIndex).getItem();
     }
 
     public Items setItemInCursor() {

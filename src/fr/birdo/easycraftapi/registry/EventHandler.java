@@ -8,6 +8,7 @@ import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.util.BlockPos;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -18,13 +19,14 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class EventHandler implements Listener {
 
     public EventHandler(EasyCraftAPI easyCraftAPI) {
     }
 
     @org.bukkit.event.EventHandler
-    public void guiClicked(InventoryClickEvent event) {
+    public void onGuiClicked(InventoryClickEvent event) {
         if (event.getCurrentItem() != null && event.getWhoClicked() instanceof Player) {
             if (event.getClickedInventory() instanceof AnvilInventory) {
                 AnvilInventory anvilInventory = (AnvilInventory) event.getClickedInventory();
@@ -58,23 +60,27 @@ public class EventHandler implements Listener {
                     }
                 }
             } else if (!(event.getClickedInventory() instanceof PlayerInventory)) {
-                GuiScreen.buttonIsPressed((Player) event.getWhoClicked(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot());
-                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())) != null && (GuiScreen.isButton(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())), event.getSlot()) || !GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).isItemPickable(event.getSlot())))
-                    event.setCancelled(true);
-                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())) != null && GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor() != null) {
-                    ItemStack itemStack = Item.getStackFromItem(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor()).clone();
-                    itemStack.setAmount(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursorAmount());
-                    event.setCursor(itemStack);
-                    GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).itemHasBeenSetInCursor(GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursor(), GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())).setItemInCursorAmount());
+                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())) != null) {
+                    GuiScreen guiScreen = GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle()));
+                    guiScreen.buttonIsPressed((Player) event.getWhoClicked(), guiScreen, event.getSlot());
+                    if (guiScreen.isButton(guiScreen, event.getSlot()) || !guiScreen.isItemPickable(event.getSlot()))
+                        event.setCancelled(true);
+                    if (guiScreen.setItemInCursor() != null) {
+                        ItemStack itemStack = Item.getStackFromItem(guiScreen.setItemInCursor()).clone();
+                        itemStack.setAmount(guiScreen.setItemInCursorAmount());
+                        event.setCursor(itemStack);
+                        guiScreen.itemHasBeenSetInCursor(guiScreen.setItemInCursor(), guiScreen.setItemInCursorAmount());
+                    }
                 }
+
             }
         }
     }
 
     @org.bukkit.event.EventHandler
-    private void commandSend(PlayerCommandPreprocessEvent e) {
+    private void onCommandSend(PlayerCommandPreprocessEvent event) {
         int argsok = 0;
-        String[] args = e.getMessage().split(" ");
+        String[] args = event.getMessage().split(" ");
         for (int h = 0; h < GameRegistry.registeredCommands.size(); h++) {//Pour toutes les commandes enregistrées
             Command command = GameRegistry.registeredCommands.get(h);//Commande
             if (args[0].equalsIgnoreCase(command.getCommand())) {//Si c'est bien cette commande
@@ -89,22 +95,22 @@ public class EventHandler implements Listener {
                                                 if (j > 2 && args[j - 1].equalsIgnoreCase(command.getArgs().get(m).getBeforeArg().getArg()))
                                                     argsok++;
                                                 if (j == 2 && argsok == args.length - 3)//Si tout est bon
-                                                    e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, args.length - 3));
+                                                    event.setCancelled(command.onCommandExecuted(event.getPlayer(), args, i, args.length - 3));
                                             }
                                         }
                                     }
                                 } else {//Si il y a un seul argument
                                     for (int m = 0; m < command.getArgs().size(); m++) {//Pour chaque argument
                                         if (command.getArgs().get(m).getArgPos() == 0 && args[2].equalsIgnoreCase(command.getArgs().get(m).getArg()))
-                                            e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, 0));
+                                            event.setCancelled(command.onCommandExecuted(event.getPlayer(), args, i, 0));
                                     }
                                 }
                             } else //Si il y a seulement un variant
-                                e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, i, -1));
+                                event.setCancelled(command.onCommandExecuted(event.getPlayer(), args, i, -1));
                         }
                     }
                 } else if (args.length == 1)//Si il y a seulement la commande
-                    e.setCancelled(command.onCommandExecuted(e.getPlayer(), args, -1, -1));
+                    event.setCancelled(command.onCommandExecuted(event.getPlayer(), args, -1, -1));
             }
         }
     }
@@ -123,20 +129,25 @@ public class EventHandler implements Listener {
     }
 
     @org.bukkit.event.EventHandler
-    public void customAnvilRecipe(PrepareAnvilEvent e) {
-        ItemStack[] contents = e.getInventory().getContents();
+    public void customAnvilRecipe(PrepareAnvilEvent event) {
+        ItemStack[] contents = event.getInventory().getContents();
         if (contents[0] != null) {
             for (int i = 0; i < GameRegistry.registeredAnvilRecipes.size(); i++) {
                 if (Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemLeft()).equals(contents[0])) {
                     if (GameRegistry.registeredAnvilRecipes.get(i).getItemRight() != null) {
                         if (contents[1] != null && Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight()).equals(contents[1])) {
-                            e.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                            event.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
                         }
                     } else if (contents[1] == null) {
-                        e.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                        event.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
                     }
                 }
             }
         }
+    }
+
+    @org.bukkit.event.EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+
     }
 }
