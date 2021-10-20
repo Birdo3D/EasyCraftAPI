@@ -10,8 +10,8 @@ import org.bukkit.inventory.Inventory;
 public class PlayerHelper {
 
     public static void displayGui(Player playerIn, int guiIndex) {
-        if (GameRegistry.registeredGuis.get(guiIndex) != null) {
-            GuiScreen guiScreen = GameRegistry.registeredGuis.get(guiIndex);
+        if (GameRegistry.getRegisteredGuis().get(guiIndex) != null) {
+            GuiScreen guiScreen = GameRegistry.getRegisteredGuis().get(guiIndex);
             guiScreen.initGui();
             guiScreen.drawScreen();
             Inventory inventory = Bukkit.createInventory(null, guiScreen.getSize(), guiScreen.getCustomName());

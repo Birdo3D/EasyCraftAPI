@@ -19,11 +19,11 @@ public class Ticking implements Listener {
 
     public static void tick() {
         count = Bukkit.getScheduler().scheduleSyncRepeatingTask(instance, () -> {
-            for (Items item : GameRegistry.registeredItems.values())
+            for (Items item : GameRegistry.getRegisteredItems().values())
                 item.onTick(count);
-            for (Blocks block : GameRegistry.registeredBlocks.values())
+            for (Blocks block : GameRegistry.getRegisteredBlocks().values())
                 block.onTick(count);
-            for (GuiScreen guiScreen : GameRegistry.registeredGuis.values())
+            for (GuiScreen guiScreen : GameRegistry.getRegisteredGuis().values())
                 guiScreen.onTick(count);
             if (count > 1000000000)
                 count = 0;

@@ -16,70 +16,66 @@ import java.util.logging.Level;
 
 public class GameRegistry {
 
-    public static final Map<Integer, Items> registeredItems = new HashMap<>();
-    public static final Map<Integer, Blocks> registeredBlocks = new HashMap<>();
-    public static final Map<Integer, GuiScreen> registeredGuis = new HashMap<>();
-    public static final Map<Integer, Command> registeredCommands = new HashMap<>();
-    public static final List<AnvilRecipes> registeredAnvilRecipes = new ArrayList<>();
+    private static final Map<Integer, Items> registeredItems = new HashMap<>();
+    private static final Map<Integer, Blocks> registeredBlocks = new HashMap<>();
+    private static final Map<Integer, GuiScreen> registeredGuis = new HashMap<>();
+    private static final Map<Integer, Command> registeredCommands = new HashMap<>();
+    private static final List<AnvilRecipes> registeredAnvilRecipes = new ArrayList<>();
 
-    private static EasyCraftAPI instance;
-
-    public GameRegistry(EasyCraftAPI easyCraftAPI) {
-        instance = easyCraftAPI;
-    }
-
-    public GameRegistry() {
-    }
-
-    public void vanillaRegistering() {
-        //Items
-        instance.logger.log(Level.INFO, Messages.registeringVanillaItemsMessage);
-
-        registerVanillaItems(Items.DIAMOND);
-    }
-
-    public void registerItem(String pluginIndex, Items item) {
+    public static void registerItem(String pluginIndex, Items item) {
         registeredItems.put(item.getId(), item);
-        instance.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
+        EasyCraftAPI.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
     }
 
-    public void registerBlock(String pluginIndex, Blocks block) {
+    public static void registerBlock(String pluginIndex, Blocks block) {
         registeredBlocks.put(block.getId(), block);
         //instance.logger.log(Level.INFO, Messages.registeringBlockMessage(block.getName()));
     }
 
-    public void registerAllItems(String pluginIndex, Items... items) {
+    public static void registerItems(String pluginIndex, Items... items) {
         for (Items item : items) {
             registeredItems.put(item.getId(), item);
-            instance.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
+            EasyCraftAPI.logger.log(Level.INFO, Messages.registeringItemMessage(item.getName()));
         }
     }
 
-    public void registerAllBlocks(String pluginIndex, Blocks... blocks) {
+    public static void registerBlocks(String pluginIndex, Blocks... blocks) {
         for (Blocks block : blocks) {
             registeredBlocks.put(block.getId(), block);
             //instance.logger.log(Level.INFO, Messages.registeringBlockMessage(block.getName()));
         }
     }
 
-    public void registerRecipe(String pluginIndex, Object recipe) {
+    public static void registerRecipe(String pluginIndex, Object recipe) {
         if (recipe instanceof AnvilRecipes)
             registeredAnvilRecipes.add((AnvilRecipes) recipe);
     }
 
-    public void registerGui(String pluginIndex, GuiScreen gui, int index) {
+    public static void registerGui(String pluginIndex, GuiScreen gui, int index) {
         registeredGuis.put(index, gui);
     }
 
-    public void registerCommand(String pluginIndex, Command command) {
+    public static void registerCommand(String pluginIndex, Command command) {
         registeredCommands.put(command.getCommandIndex(), command);
     }
 
-    public void registerVanillaItems(Items item) {
-        registeredItems.put(item.getId(), item);
+    public static Map<Integer, Items> getRegisteredItems() {
+        return registeredItems;
     }
 
-    public void registerVanillaBlocks(Blocks block) {
-        registeredBlocks.put(block.getId(), block);
+    public static Map<Integer, Blocks> getRegisteredBlocks() {
+        return registeredBlocks;
+    }
+
+    public static Map<Integer, GuiScreen> getRegisteredGuis() {
+        return registeredGuis;
+    }
+
+    public static Map<Integer, Command> getRegisteredCommands() {
+        return registeredCommands;
+    }
+
+    public static List<AnvilRecipes> getRegisteredAnvilRecipes() {
+        return registeredAnvilRecipes;
     }
 }

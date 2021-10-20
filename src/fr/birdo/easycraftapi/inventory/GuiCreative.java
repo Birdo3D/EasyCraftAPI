@@ -83,7 +83,6 @@ public class GuiCreative extends GuiScreen {
                 addItem(new Items(Material.LIGHT_GRAY_STAINED_GLASS_PANE, -1).setName(" "), this.itemsSlots.get(i - (this.itemsPage * 20)));
     }
 
-    @Override
     public String getCustomName() {
         return ChatColor.BOLD + "Creative Inventory";
     }

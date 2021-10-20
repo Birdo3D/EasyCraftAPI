@@ -100,7 +100,7 @@ public class CreativeTabs {
 
     public static List<Items> displayAllRelevantItems(CreativeTabs tab) {
         List<Items> itemsToDisplay = new ArrayList<>();
-        for (Items item : GameRegistry.registeredItems.values()) {
+        for (Items item : GameRegistry.getRegisteredItems().values()) {
             if (item.isInCreativeTab(tab))
                 itemsToDisplay.add(item);
         }

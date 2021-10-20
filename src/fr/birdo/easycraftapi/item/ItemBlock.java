@@ -25,7 +25,7 @@ public class ItemBlock extends Items {
     }
 
     public void onItemUse(Player player, World worldIn, BlockPos pos) {
-        if (GameRegistry.registeredBlocks.containsValue(this.block)) {
+        if (GameRegistry.getRegisteredBlocks().containsValue(this.block)) {
             if (worldIn.getBlockAt(pos.getX(), pos.getY(), pos.getZ()).getType() == Material.AIR) {
                 worldIn.getBlockAt(pos.getX(), pos.getY(), pos.getZ()).setType(this.block.getMaterial());
                 //set block data

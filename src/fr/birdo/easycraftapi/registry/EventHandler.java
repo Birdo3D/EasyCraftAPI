@@ -31,24 +31,24 @@ public class EventHandler implements Listener {
             if (event.getClickedInventory() instanceof AnvilInventory) {
                 AnvilInventory anvilInventory = (AnvilInventory) event.getClickedInventory();
                 if (event.getSlot() == 2) {
-                    for (int i = 0; i < GameRegistry.registeredAnvilRecipes.size(); i++) {
+                    for (int i = 0; i < GameRegistry.getRegisteredAnvilRecipes().size(); i++) {
                         if (anvilInventory.getItem(2) != null) {
-                            if (Objects.requireNonNull(anvilInventory.getItem(2)).isSimilar(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()))) {
+                            if (Objects.requireNonNull(anvilInventory.getItem(2)).isSimilar(Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItem()))) {
                                 if (anvilInventory.getContents()[0] != null) {
-                                    if (anvilInventory.getContents()[0].equals(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemLeft()))) {
-                                        if (GameRegistry.registeredAnvilRecipes.get(i).getItemRight() != null) {
-                                            if (anvilInventory.getContents()[1] != null && Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight()).equals(anvilInventory.getContents()[1])) {
-                                                event.setCursor(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                                    if (anvilInventory.getContents()[0].equals(Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItemLeft()))) {
+                                        if (GameRegistry.getRegisteredAnvilRecipes().get(i).getItemRight() != null) {
+                                            if (anvilInventory.getContents()[1] != null && Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItemRight()).equals(anvilInventory.getContents()[1])) {
+                                                event.setCursor(Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItem()));
                                                 anvilInventory.setItem(0, null);
-                                                ItemStack itemSlot1 = Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight());
+                                                ItemStack itemSlot1 = Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItemRight());
                                                 itemSlot1.setAmount(anvilInventory.getItem(1).getAmount() - 1);
                                                 anvilInventory.setItem(1, itemSlot1);
                                                 anvilInventory.setItem(2, null);
                                             }
                                         } else if (anvilInventory.getContents()[1] == null) {
-                                            event.setCursor(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                                            event.setCursor(Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItem()));
                                             anvilInventory.setItem(0, null);
-                                            ItemStack itemSlot1 = Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight());
+                                            ItemStack itemSlot1 = Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItemRight());
                                             itemSlot1.setAmount(anvilInventory.getItem(1).getAmount() - 1);
                                             anvilInventory.setItem(1, itemSlot1);
                                             anvilInventory.setItem(2, null);
@@ -60,8 +60,8 @@ public class EventHandler implements Listener {
                     }
                 }
             } else if (!(event.getClickedInventory() instanceof PlayerInventory)) {
-                if (GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle())) != null) {
-                    GuiScreen guiScreen = GameRegistry.registeredGuis.get(GuiScreen.getIdByName(event.getView().getTitle()));
+                if (GameRegistry.getRegisteredGuis().get(GuiScreen.getIdByName(event.getView().getTitle())) != null) {
+                    GuiScreen guiScreen = GameRegistry.getRegisteredGuis().get(GuiScreen.getIdByName(event.getView().getTitle()));
                     guiScreen.buttonIsPressed((Player) event.getWhoClicked(), guiScreen, event.getSlot());
                     if (guiScreen.isButton(guiScreen, event.getSlot()) || !guiScreen.isItemPickable(event.getSlot()))
                         event.setCancelled(true);
@@ -81,8 +81,8 @@ public class EventHandler implements Listener {
     private void onCommandSend(PlayerCommandPreprocessEvent event) {
         int argsok = 0;
         String[] args = event.getMessage().split(" ");
-        for (int h = 0; h < GameRegistry.registeredCommands.size(); h++) {//Pour toutes les commandes enregistrées
-            Command command = GameRegistry.registeredCommands.get(h);//Commande
+        for (int h = 0; h < GameRegistry.getRegisteredCommands().size(); h++) {//Pour toutes les commandes enregistrées
+            Command command = GameRegistry.getRegisteredCommands().get(h);//Commande
             if (args[0].equalsIgnoreCase(command.getCommand())) {//Si c'est bien cette commande
                 if (args.length > 1 && command.getVariantSize() != 0) {//Si il y a des variants
                     for (int i = 0; i < command.getVariantSize(); i++) {//Pour chaque variant de cette commande
@@ -117,7 +117,7 @@ public class EventHandler implements Listener {
 
     @org.bukkit.event.EventHandler
     public void onItemUse(PlayerInteractEvent event) {
-        for (Items item : GameRegistry.registeredItems.values())
+        for (Items item : GameRegistry.getRegisteredItems().values())
             if (event.getItem() != null)
                 if (event.getItem().isSimilar(Item.getStackFromItem(item))) {
                     BlockPos pos = new BlockPos(0, 0, 0);
@@ -132,14 +132,14 @@ public class EventHandler implements Listener {
     public void customAnvilRecipe(PrepareAnvilEvent event) {
         ItemStack[] contents = event.getInventory().getContents();
         if (contents[0] != null) {
-            for (int i = 0; i < GameRegistry.registeredAnvilRecipes.size(); i++) {
-                if (Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemLeft()).equals(contents[0])) {
-                    if (GameRegistry.registeredAnvilRecipes.get(i).getItemRight() != null) {
-                        if (contents[1] != null && Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItemRight()).equals(contents[1])) {
-                            event.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+            for (int i = 0; i < GameRegistry.getRegisteredAnvilRecipes().size(); i++) {
+                if (Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItemLeft()).equals(contents[0])) {
+                    if (GameRegistry.getRegisteredAnvilRecipes().get(i).getItemRight() != null) {
+                        if (contents[1] != null && Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItemRight()).equals(contents[1])) {
+                            event.setResult(Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItem()));
                         }
                     } else if (contents[1] == null) {
-                        event.setResult(Item.getStackFromItem(GameRegistry.registeredAnvilRecipes.get(i).getItem()));
+                        event.setResult(Item.getStackFromItem(GameRegistry.getRegisteredAnvilRecipes().get(i).getItem()));
                     }
                 }
             }

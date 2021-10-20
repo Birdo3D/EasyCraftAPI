@@ -112,8 +112,8 @@ public class GuiScreen extends PlayerHelper {
     }
 
     public static int getIdByName(String name) {
-        for (int i : GameRegistry.registeredGuis.keySet()) {
-            if (GameRegistry.registeredGuis.get(i).getCustomName().equalsIgnoreCase(name)) {
+        for (int i : GameRegistry.getRegisteredGuis().keySet()) {
+            if (GameRegistry.getRegisteredGuis().get(i).getCustomName().equalsIgnoreCase(name)) {
                 return i;
             }
         }
@@ -125,8 +125,8 @@ public class GuiScreen extends PlayerHelper {
     }
 
     public static int getId(GuiScreen gui) {
-        for (int i : GameRegistry.registeredGuis.keySet()) {
-            if (GameRegistry.registeredGuis.get(i) == gui) {
+        for (int i : GameRegistry.getRegisteredGuis().keySet()) {
+            if (GameRegistry.getRegisteredGuis().get(i) == gui) {
                 return i;
             }
         }
