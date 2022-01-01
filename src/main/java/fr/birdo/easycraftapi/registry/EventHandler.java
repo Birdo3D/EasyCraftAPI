@@ -6,7 +6,7 @@ import fr.birdo.easycraftapi.inventory.GuiScreen;
 import fr.birdo.easycraftapi.item.Item;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.util.BlockPos;
-import org.bukkit.entity.Player;
+import fr.birdo.easycraftapi.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;

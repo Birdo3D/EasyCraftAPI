@@ -1,16 +1,15 @@
 package fr.birdo.easycraftapi.inventory;
 
-import fr.birdo.easycraftapi.entity.PlayerHelper;
+import fr.birdo.easycraftapi.entity.Player;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.registry.GameRegistry;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GuiScreen extends PlayerHelper {
+public class GuiScreen {
 
     private int size;
     private final Map<Integer, GuiButton> buttons = new HashMap<>();
@@ -67,7 +66,7 @@ public class GuiScreen extends PlayerHelper {
             for (GuiButton guiButton : gui.getButtons().values()) {
                 if (guiButton.getPos() == slotIndex) {
                     gui.onButtonPressed(guiButton.getId());
-                    PlayerHelper.updateGui(player, gui);
+                    player.updateGui(gui);
                     break;
                 }
             }
