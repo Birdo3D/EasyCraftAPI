@@ -1,5 +1,6 @@
 package fr.birdo.easycraftapi.advancement;
 
+import com.sun.org.apache.bcel.internal.generic.GOTO;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
@@ -76,6 +77,55 @@ public class Advancements extends Advancement {
     public static final Advancement SKYS_THE_LIMIT = new Advancements("minecraft:end/elytra", GOAL);
     public static final Advancement GREAT_VIEW_FROM_UP_HERE = new Advancements("minecraft:end/levitate", CHALLENGE);
 
+    //Adventure
+    public static final Advancement ADVENTURE = new Advancements("minecraft:adventure/root", NORMAL);
+    public static final Advancement VOLUNTARY_EXILE = new Advancements("minecraft:adventure/voluntary_exile", NORMAL);
+    public static final Advancement IS_IT_A_BIRD = new Advancements("minecraft:adventure/spyglass_at_parrot", NORMAL);
+    public static final Advancement MONSTER_HUNTER = new Advancements("minecraft:adventure/kill_a_mob", NORMAL);
+    public static final Advancement WHAT_A_DEAL = new Advancements("minecraft:adventure/trade", NORMAL);
+    public static final Advancement STICHY_SITUATION = new Advancements("minecraft:adventure/honey_block_slide", NORMAL);
+    public static final Advancement OL_BETSY = new Advancements("minecraft:adventure/ol_betsy", NORMAL);
+    public static final Advancement SURGE_PROTECTOR = new Advancements("minecraft:adventure/lightning_rod_with_villager_no_fire", NORMAL);
+    public static final Advancement CAVES_AND_CLIFFS = new Advancements("minecraft:adventure/fall_from_world_height", NORMAL);
+    public static final Advancement SWEET_DREAMS = new Advancements("minecraft:adventure/sleep_in_bed", NORMAL);
+    public static final Advancement HERO_OF_THE_VILLAGE = new Advancements("minecraft:adventure/hero_of_the_village", CHALLENGE);
+    public static final Advancement IS_IT_A_BALLOON = new Advancements("minecraft:adventure/spyglass_at_ghast", NORMAL);
+    public static final Advancement A_THROWAWAY_JOKE = new Advancements("minecraft:adventure/throw_trident", NORMAL);
+    public static final Advancement TAKE_AIM = new Advancements("minecraft:adventure/shoot_arrow", NORMAL);
+    public static final Advancement MONSTERS_HUNTED = new Advancements("minecraft:adventure/kill_all_mobs", CHALLENGE);
+    public static final Advancement POSTMORTAL = new Advancements("minecraft:adventure/totem_of_undying", GOAL);
+    public static final Advancement HIRED_HELP = new Advancements("minecraft:adventure/summon_iron_golem",GOAL);
+    public static final Advancement STAR_TRADER = new Advancements("minecraft:adventure/trade_at_world_height", NORMAL);
+    public static final Advancement TWO_BIRDS_ONE_ARROW = new Advancements("minecraft:adventure/two_birds_one_arrow", CHALLENGE);
+    public static final Advancement WHO_IS_PILLAGER_NOW = new Advancements("minecraft:adventure/whos_the_pillager_now", NORMAL);
+    public static final Advancement ARBALISTIC = new Advancements("minecraft:adventure/arbalistic", CHALLENGE);
+    public static final Advancement ADVENTURING_TIME = new Advancements("minecraft:adventure/adventuring_time", CHALLENGE);
+    public static final Advancement SOUND_OF_MUSIC = new Advancements("minecraft:adventure/play_jukebox_in_meadows", NORMAL);
+    public static final Advancement LIGHT_AS_A_RABBIT = new Advancements("minecraft:adventure/walk_on_powder_snow_with_leather_boots", NORMAL);
+    public static final Advancement IS_IT_A_PLANE = new Advancements("minecraft:adventure/spyglass_at_dragon", NORMAL);
+    public static final Advancement VERY_VERY_FRIGHTENING = new Advancements("minecraft:adventure/very_very_frightening", NORMAL);
+    public static final Advancement SNIPER_DUEL = new Advancements("minecraft:adventure/sniper_duel", CHALLENGE);
+    public static final Advancement BULLSEYE = new Advancements("minecraft:adventure/bullseye", CHALLENGE);
+
+    //Husbandry
+    public static final Advancement HUSBANDRY = new Advancements("minecraft:husbandry/root", NORMAL);
+    public static final Advancement BEE_OUR_GUEST = new Advancements("minecraft:husbandry/safely_harvest_honey", NORMAL);
+    public static final Advancement THE_PARROTS_AND_THE_BATS = new Advancements("minecraft:husbandry/breed_an_animal", NORMAL);
+    public static final Advancement WHATEVER_FLOATS_YOUR_GOAT = new Advancements("minecraft:husbandry/ride_a_boat_with_a_goat", NORMAL);
+    public static final Advancement BEST_FRIENDS_FOREVER = new Advancements("minecraft:husbandry/tame_an_animal", NORMAL);
+    public static final Advancement GLOW_AND_BEHOLD = new Advancements("minecraft:husbandry/make_a_sign_glow", NORMAL);
+    public static final Advancement FISHY_BUSINESS = new Advancements("minecraft:husbandry/fishy_business", NORMAL);
+    public static final Advancement TOTAL_BEELOCATION = new Advancements("minecraft:husbandry/silk_touch_nest", NORMAL);
+    public static final Advancement A_SEEDY_PLACE = new Advancements("minecraft:husbandry/plant_seed", NORMAL);
+    public static final Advancement WAX_ON = new Advancements("minecraft:husbandry/wax_on", NORMAL);
+    public static final Advancement TWO_BY_TWO = new Advancements("minecraft:husbandry/bred_all_animals", CHALLENGE);
+    public static final Advancement A_COMPLETE_CATALOGUE = new Advancements("minecraft:husbandry/complete_catalogue", CHALLENGE);
+    public static final Advancement TACTICAL_FISHING = new Advancements("minecraft:husbandry/tactical_fishing", NORMAL);
+    public static final Advancement A_BALANCE_DIET = new Advancements("minecraft:husbandry/balanced_diet", CHALLENGE);
+    public static final Advancement SERIOUS_DEDICATION = new Advancements("minecraft:husbandry/obtain_netherite_hoe", CHALLENGE);
+    public static final Advancement WAX_OFF = new Advancements("minecraft:husbandry/wax_off", NORMAL);
+    public static final Advancement THE_CUTEST_PREDATOR= new Advancements("minecraft:husbandry/axolotl_in_a_bucket", NORMAL);
+    public static final Advancement THE_HEALING_POWER_OF_FRIENDSHIP= new Advancements("minecraft:husbandry/kill_axolotl_target", NORMAL);
 
 
     private Advancements(String id, AdvancementType type) {
