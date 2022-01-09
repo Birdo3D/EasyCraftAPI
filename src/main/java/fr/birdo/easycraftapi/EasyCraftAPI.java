@@ -1,5 +1,7 @@
 package fr.birdo.easycraftapi;
 
+import fr.birdo.easycraftapi.advancement.AdvancementEvent;
+import fr.birdo.easycraftapi.advancement.AdvancementFile;
 import fr.birdo.easycraftapi.command.CommandCreative;
 import fr.birdo.easycraftapi.inventory.GuiCreative;
 import fr.birdo.easycraftapi.item.Items;
@@ -24,17 +26,20 @@ public class EasyCraftAPI extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new EventHandler(this), this);
         getServer().getPluginManager().registerEvents(new Ticking(this), this);
+        getServer().getPluginManager().registerEvents(new AdvancementEvent(this), this);
         saveDefaultConfig();
         vanillaRegistering();
         GameRegistry.registerCommand(PLUGINID, new CommandCreative());
         GameRegistry.registerGui(PLUGINID, new GuiCreative(), 0);
         Ticking.tick();
         logger.log(Level.INFO, Messages.enableMessage(VERSION));
+        AdvancementFile.clear();
     }
 
     @Override
     public void onDisable() {
         logger.log(Level.INFO, Messages.disableMessage);
+        AdvancementFile.clear();
     }
 
     private void vanillaRegistering() {

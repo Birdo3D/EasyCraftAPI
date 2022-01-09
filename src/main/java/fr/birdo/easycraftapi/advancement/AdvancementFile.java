@@ -1,6 +1,7 @@
 package fr.birdo.easycraftapi.advancement;
 
 import fr.birdo.easycraftapi.EasyCraftAPI;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
@@ -15,8 +16,12 @@ public class AdvancementFile {
     public static void clear() {
         File temp_adv_folder = new File(getTempFolder());
 
-        if (temp_adv_folder.exists())
-            temp_adv_folder.delete();
+        try {
+            if (temp_adv_folder.exists())
+            FileUtils.deleteDirectory(temp_adv_folder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void create(Player player) {
