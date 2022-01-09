@@ -1,15 +1,21 @@
 package fr.birdo.easycraftapi.advancement;
 
-import org.json.simple.JSONObject;
-
 public class Advancement {
 
     private String id;
+    private String name;
     private AdvancementType type;
 
     public Advancement(String id, AdvancementType type) {
         this.id = id;
         this.type = type;
+        this.name = "";
+    }
+
+    public Advancement(String name, String id, AdvancementType type) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
     }
 
     public AdvancementType getType() {
@@ -18,5 +24,9 @@ public class Advancement {
 
     public String getId() {
         return this.id;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }
