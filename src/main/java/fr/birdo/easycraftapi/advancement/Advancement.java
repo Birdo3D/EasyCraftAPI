@@ -1,5 +1,7 @@
 package fr.birdo.easycraftapi.advancement;
 
+import org.json.simple.JSONObject;
+
 public class Advancement {
 
     private String id;

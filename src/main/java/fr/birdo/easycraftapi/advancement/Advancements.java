@@ -1,6 +1,5 @@
 package fr.birdo.easycraftapi.advancement;
 
-import com.sun.org.apache.bcel.internal.generic.GOTO;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
@@ -83,7 +82,7 @@ public class Advancements extends Advancement {
     public static final Advancement IS_IT_A_BIRD = new Advancements("minecraft:adventure/spyglass_at_parrot", NORMAL);
     public static final Advancement MONSTER_HUNTER = new Advancements("minecraft:adventure/kill_a_mob", NORMAL);
     public static final Advancement WHAT_A_DEAL = new Advancements("minecraft:adventure/trade", NORMAL);
-    public static final Advancement STICHY_SITUATION = new Advancements("minecraft:adventure/honey_block_slide", NORMAL);
+    public static final Advancement STICKY_SITUATION = new Advancements("minecraft:adventure/honey_block_slide", NORMAL);
     public static final Advancement OL_BETSY = new Advancements("minecraft:adventure/ol_betsy", NORMAL);
     public static final Advancement SURGE_PROTECTOR = new Advancements("minecraft:adventure/lightning_rod_with_villager_no_fire", NORMAL);
     public static final Advancement CAVES_AND_CLIFFS = new Advancements("minecraft:adventure/fall_from_world_height", NORMAL);
@@ -121,11 +120,11 @@ public class Advancements extends Advancement {
     public static final Advancement TWO_BY_TWO = new Advancements("minecraft:husbandry/bred_all_animals", CHALLENGE);
     public static final Advancement A_COMPLETE_CATALOGUE = new Advancements("minecraft:husbandry/complete_catalogue", CHALLENGE);
     public static final Advancement TACTICAL_FISHING = new Advancements("minecraft:husbandry/tactical_fishing", NORMAL);
-    public static final Advancement A_BALANCE_DIET = new Advancements("minecraft:husbandry/balanced_diet", CHALLENGE);
+    public static final Advancement A_BALANCED_DIET = new Advancements("minecraft:husbandry/balanced_diet", CHALLENGE);
     public static final Advancement SERIOUS_DEDICATION = new Advancements("minecraft:husbandry/obtain_netherite_hoe", CHALLENGE);
     public static final Advancement WAX_OFF = new Advancements("minecraft:husbandry/wax_off", NORMAL);
-    public static final Advancement THE_CUTEST_PREDATOR= new Advancements("minecraft:husbandry/axolotl_in_a_bucket", NORMAL);
-    public static final Advancement THE_HEALING_POWER_OF_FRIENDSHIP= new Advancements("minecraft:husbandry/kill_axolotl_target", NORMAL);
+    public static final Advancement THE_CUTEST_PREDATOR = new Advancements("minecraft:husbandry/axolotl_in_a_bucket", NORMAL);
+    public static final Advancement THE_HEALING_POWER_OF_FRIENDSHIP = new Advancements("minecraft:husbandry/kill_axolotl_target", NORMAL);
 
 
     private Advancements(String id, AdvancementType type) {
@@ -146,12 +145,17 @@ public class Advancements extends Advancement {
         List<Advancement> player_advancements = new ArrayList<>();
         try {
             String path = Bukkit.getWorldContainer().getAbsolutePath(); //Get the path of the server main folder
-            //Get file of player's advancement file in /world/advancements/
+            //Get file of player's advancement file in /world/advancements/ and temp file of player's advancement file in /world/advancements/temp
             File adv_file = new File(path.substring(0, path.length() - 1) + "world" + File.separator + "advancements" + File.separator + player.getUniqueId() + ".json");
+            File temp_adv_file = new File(AdvancementFile.getTempFolder() + File.separator + player.getUniqueId() + ".json");
 
-            //Parse the file
+            //Parse the files
             Reader adv_reader = new FileReader(adv_file);
             JSONObject advs = (JSONObject) new JSONParser().parse(adv_reader);
+
+            Reader temp_adv_reader = new FileReader(adv_file);
+            JSONObject temp_advs = (JSONObject) new JSONParser().parse(temp_adv_reader);
+            advs.putAll(temp_advs);
 
             //Loop on each advancement
             for (Object key : advs.keySet()) {
@@ -171,6 +175,7 @@ public class Advancements extends Advancement {
                     player_advancements.add(new Advancement(key.toString(), getTypeById(key.toString())));
                 }
             }
+            adv_reader.close();
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
