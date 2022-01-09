@@ -1,6 +1,7 @@
 package fr.birdo.easycraftapi.registry;
 
 import fr.birdo.easycraftapi.EasyCraftAPI;
+import fr.birdo.easycraftapi.advancement.Advancement;
 import fr.birdo.easycraftapi.block.Blocks;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.command.Command;
@@ -21,6 +22,7 @@ public class GameRegistry {
     private static final Map<Integer, GuiScreen> registeredGuis = new HashMap<Integer, GuiScreen>();
     private static final Map<Integer, Command> registeredCommands = new HashMap<Integer, Command>();
     private static final List<AnvilRecipes> registeredAnvilRecipes = new ArrayList<AnvilRecipes>();
+    public static final HashMap<String, Advancement> registeredAdvancements = new HashMap<String, Advancement>();
 
     public static void registerItem(String pluginIndex, Items item) {
         registeredItems.put(item.getId(), item);

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GuiScreen extends PlayerHelper {
+public class GuiScreen {
 
     private int size;
     private final Map<Integer, GuiButton> buttons = new HashMap<>();
@@ -67,7 +67,7 @@ public class GuiScreen extends PlayerHelper {
             for (GuiButton guiButton : gui.getButtons().values()) {
                 if (guiButton.getPos() == slotIndex) {
                     gui.onButtonPressed(guiButton.getId());
-                    PlayerHelper.updateGui(player, gui);
+                    PlayerHelper.updateGui(player,gui);
                     break;
                 }
             }
