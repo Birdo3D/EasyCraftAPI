@@ -17,9 +17,4 @@ public class AdvancementEvent implements Listener {
         NamespacedKey adv_namekey = event.getAdvancement().getKey();
         AdvancementFile.addAdvancement(event.getPlayer(), new Advancement(adv_namekey.getNamespace() +":"+ adv_namekey.getKey(),AdvancementType.NORMAL));
     }
-
-    @EventHandler
-    public void playerJoin(PlayerJoinEvent event){
-        AdvancementFile.create(event.getPlayer());
-    }
 }

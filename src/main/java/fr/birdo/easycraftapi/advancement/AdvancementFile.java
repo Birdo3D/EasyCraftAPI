@@ -52,6 +52,11 @@ public class AdvancementFile {
             //Get temp file of player's advancement file in /world/advancements/temp
             File adv_file = new File(getTempFolder() + File.separator + player.getUniqueId() + ".json");
 
+            if (!adv_file.exists()){
+                new File(getTempFolder()).mkdir();
+                adv_file.createNewFile();
+            }
+
             if(adv_file.length() != 0) {
                 //Parse the file
                 Reader adv_reader = new FileReader(adv_file);
