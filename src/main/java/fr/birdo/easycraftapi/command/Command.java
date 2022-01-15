@@ -55,4 +55,8 @@ public class Command {
     public List<CommandArg> getArgs() {
         return this.args;
     }
+
+    public List<String> getVariants() {
+        return new ArrayList<>(variants.values());
+    }
 }

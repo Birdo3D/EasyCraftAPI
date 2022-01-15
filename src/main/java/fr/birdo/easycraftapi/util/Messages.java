@@ -23,4 +23,8 @@ public class Messages {
     public static String registeringBlockMessage(String blockName) {
         return pluginTag + "Registering Block " + blockName + "...";
     }
+
+    public static String commandNotRegistered(String commandName) {
+        return pluginTag + "Command "+commandName+" is not registered in plugin.yml";
+    }
 }

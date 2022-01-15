@@ -4,3 +4,6 @@ version: 1.0
 author: Birdo
 api-version: 1.18
 prefix: EasyCraftAPI
+commands:
+  creative:
+    description: Creative Menu
