@@ -1,6 +1,6 @@
 package fr.birdo.easycraftapi.advancement;
 
-enum AdvancementType {
+public enum AdvancementType {
 
     NORMAL(0),
     GOAL(1),
@@ -12,7 +12,7 @@ enum AdvancementType {
         this.id = id;
     }
 
-    int getId() {
+    public int getId() {
         return this.id;
     }
 }

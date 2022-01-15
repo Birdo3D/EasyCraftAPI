@@ -3,11 +3,13 @@ package fr.birdo.easycraftapi.registry;
 import fr.birdo.easycraftapi.EasyCraftAPI;
 import fr.birdo.easycraftapi.advancement.Advancement;
 import fr.birdo.easycraftapi.block.Blocks;
+import fr.birdo.easycraftapi.command.CommandCompleter;
 import fr.birdo.easycraftapi.item.Items;
 import fr.birdo.easycraftapi.command.Command;
 import fr.birdo.easycraftapi.inventory.GuiScreen;
 import fr.birdo.easycraftapi.recipe.AnvilRecipes;
 import fr.birdo.easycraftapi.util.Messages;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,8 +59,15 @@ public class GameRegistry {
         registeredGuis.put(index, gui);
     }
 
-    public static void registerCommand(String pluginIndex, Command command) {
+    public static void registerCommand(JavaPlugin plugin, Command command) {
         registeredCommands.put(command.getCommandIndex(), command);
+        //Add TabCompleter
+        try {
+            plugin.getCommand(command.getCommand().substring(1)).setTabCompleter(new CommandCompleter());
+        }catch(NullPointerException e){
+            EasyCraftAPI.logger.log(Level.SEVERE,Messages.commandNotRegistered(command.getCommand()));
+            e.printStackTrace();
+        }
     }
 
     public static Map<Integer, Items> getRegisteredItems() {

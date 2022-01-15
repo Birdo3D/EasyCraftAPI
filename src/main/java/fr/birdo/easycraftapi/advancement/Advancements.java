@@ -153,7 +153,7 @@ public class Advancements extends Advancement {
             Reader adv_reader = new FileReader(adv_file);
             JSONObject advs = (JSONObject) new JSONParser().parse(adv_reader);
 
-            Reader temp_adv_reader = new FileReader(adv_file);
+            Reader temp_adv_reader = new FileReader(temp_adv_file);
             JSONObject temp_advs = (JSONObject) new JSONParser().parse(temp_adv_reader);
             advs.putAll(temp_advs);
 
