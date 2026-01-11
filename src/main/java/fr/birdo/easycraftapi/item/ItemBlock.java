@@ -1,5 +1,6 @@
 package fr.birdo.easycraftapi.item;
 
+import com.google.errorprone.annotations.DoNotCall;
 import fr.birdo.easycraftapi.block.Blocks;
 import fr.birdo.easycraftapi.creativetab.CreativeTabs;
 import fr.birdo.easycraftapi.registry.GameRegistry;
@@ -9,13 +10,13 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemBlock extends Items {
 
     private Blocks block;
 
-    public ItemBlock(@Nonnull Blocks block, Material material) {
+    public ItemBlock(@NotNull Blocks block, Material material) {
         super(material, block.getId());
         this.block = block;
         for (CreativeTabs tab : CreativeTabs.CREATIVE_TAB_ARRAY) {

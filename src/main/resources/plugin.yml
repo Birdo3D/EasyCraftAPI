@@ -1,8 +1,8 @@
-main: fr.birdo.easycraftapi.EasyCraftAPI
 name: EasyCraftAPI
-version: 1.2
+main: fr.birdo.easycraftapi.EasyCraftAPI
+version: 1.3
 author: Birdo
-api-version: 1.18
+api-version: 1.21
 prefix: EasyCraftAPI
 commands:
   creative:
